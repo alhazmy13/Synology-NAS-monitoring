@@ -3,7 +3,7 @@
 
 ![Dashboard](./dashboard.png)
 
-* Make sure influxDB, Graphana, snmp, snpmd and telegraf is already installed on your host.
+* Make sure influxDB, Grafana, snmp, snpmd and telegraf is already installed on your host.
 * edit /etc/snmp/snmp.conf and comment out the 'mibs:' line. Here is what mine looks like:
 
 ```
@@ -15,7 +15,7 @@ File: /etc/snmp/snmp.conf
 # mibs :
 
 ```
-* Get your MIBs (from here, for Synology [Synology MIB download](https://global.download.synology.com/download/Document/MIBGuide/Synology_MIB_File.zip)) and drop them in  below locations
+* Get your MIBs (from here, for Synology [Synology MIB download](https://global.download.synology.com/download/Document/MIBGuide/Synology_MIB_File.zip)) and drop them in  below location:
 ```
 user/share/snmp/mibs
 ```
@@ -28,4 +28,4 @@ snmpwalk -c public -v 2c 192.168.X.X
 
 * Update telegraf.conf with current on that attached in this repo, don't forget to update `agents = [  "192.168.X.X" ]`
 * restart telegraf service.
-* import Graphana dashboard.
+* import Grafana dashboard.
