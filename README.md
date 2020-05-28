@@ -20,7 +20,7 @@ File: /etc/snmp/snmp.conf
 user/share/snmp/mibs
 ```
 
-* Now when you do a SNMPwalk, it will automatically translate OIDs to Names. This is what it looks like against my Synology:
+* Now when you do a SNMPwalk, it will automatically translate OIDs to Names.
 
 ```
 snmpwalk -c public -v 2c 192.168.X.X
