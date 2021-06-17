@@ -77,7 +77,7 @@
   "gnetId": 14573,
   "graphTooltip": 0,
   "id": null,
-  "iteration": 1623904922898,
+  "iteration": 1623934144709,
   "links": [],
   "panels": [
     {
@@ -323,8 +323,8 @@
           ],
           "orderByTime": "ASC",
           "policy": "default",
-          "query": "SELECT \"diskStatus\" FROM \"diskTable\" WHERE (\"agent_host\" = '172.17.0.1') AND $timeFilter GROUP BY \"diskID\"",
-          "rawQuery": false,
+          "query": "SELECT last(\"diskStatus\") FROM \"diskTable\" WHERE (\"agent_host\" =~ /^$host$/) AND $timeFilter GROUP BY \"diskID\"",
+          "rawQuery": true,
           "refId": "A",
           "resultFormat": "time_series",
           "select": [
@@ -344,8 +344,8 @@
           "tags": [
             {
               "key": "agent_host",
-              "operator": "=",
-              "value": "172.17.0.1"
+              "operator": "=~",
+              "value": "/^$host$/"
             }
           ],
           "timeField": "@timestamp"
@@ -471,8 +471,8 @@
           "tags": [
             {
               "key": "agent_host",
-              "operator": "=",
-              "value": "172.17.0.1"
+              "operator": "=~",
+              "value": "/^$host$/"
             }
           ],
           "timeField": "@timestamp"
@@ -5251,9 +5251,9 @@
         "auto_count": "100",
         "auto_min": "30s",
         "current": {
-          "selected": true,
-          "text": "auto",
-          "value": "$__auto_interval_inter"
+          "selected": false,
+          "text": "1m",
+          "value": "1m"
         },
         "error": null,
         "hide": 0,
@@ -5261,12 +5261,12 @@
         "name": "inter",
         "options": [
           {
-            "selected": true,
+            "selected": false,
             "text": "auto",
             "value": "$__auto_interval_inter"
           },
           {
-            "selected": false,
+            "selected": true,
             "text": "1m",
             "value": "1m"
           }
@@ -5280,7 +5280,7 @@
     ]
   },
   "time": {
-    "from": "now-30m",
+    "from": "now-7d",
     "to": "now"
   },
   "timepicker": {
@@ -5310,5 +5310,5 @@
   "timezone": "browser",
   "title": "Synology DashBoard",
   "uid": "TIcL1_ezk22",
-  "version": 26
+  "version": 27
 }
