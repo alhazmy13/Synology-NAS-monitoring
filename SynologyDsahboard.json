@@ -1,4 +1,64 @@
 {
+  "__inputs": [
+    {
+      "name": "DS_INFLUXDB",
+      "label": "InfluxDB",
+      "description": "",
+      "type": "datasource",
+      "pluginId": "influxdb",
+      "pluginName": "InfluxDB"
+    }
+  ],
+  "__requires": [
+    {
+      "type": "panel",
+      "id": "gauge",
+      "name": "Gauge",
+      "version": ""
+    },
+    {
+      "type": "grafana",
+      "id": "grafana",
+      "name": "Grafana",
+      "version": "7.3.5"
+    },
+    {
+      "type": "panel",
+      "id": "graph",
+      "name": "Graph",
+      "version": ""
+    },
+    {
+      "type": "datasource",
+      "id": "influxdb",
+      "name": "InfluxDB",
+      "version": "1.0.0"
+    },
+    {
+      "type": "panel",
+      "id": "singlestat",
+      "name": "Singlestat",
+      "version": ""
+    },
+    {
+      "type": "panel",
+      "id": "stat",
+      "name": "Stat",
+      "version": ""
+    },
+    {
+      "type": "panel",
+      "id": "table",
+      "name": "Table",
+      "version": ""
+    },
+    {
+      "type": "panel",
+      "id": "table-old",
+      "name": "Table (old)",
+      "version": ""
+    }
+  ],
   "annotations": {
     "list": [
       {
@@ -14,847 +74,15 @@
   },
   "description": "A Dashboard to monitor Synology NAS",
   "editable": true,
-  "gnetId": 1727,
+  "gnetId": 14573,
   "graphTooltip": 0,
-  "id": 4,
-  "iteration": 1590684617340,
+  "id": null,
+  "iteration": 1623900371635,
   "links": [],
   "panels": [
     {
-      "cacheTimeout": null,
-      "colorBackground": true,
-      "colorValue": false,
-      "colors": [
-        "rgba(50, 172, 45, 0.97)",
-        "rgba(237, 129, 40, 0.89)",
-        "rgba(245, 54, 54, 0.9)"
-      ],
-      "datasource": "influxdb",
-      "fieldConfig": {
-        "defaults": {
-          "custom": {}
-        },
-        "overrides": []
-      },
-      "format": "none",
-      "gauge": {
-        "maxValue": 100,
-        "minValue": 0,
-        "show": false,
-        "thresholdLabels": false,
-        "thresholdMarkers": true
-      },
-      "gridPos": {
-        "h": 3,
-        "w": 3,
-        "x": 0,
-        "y": 0
-      },
-      "id": 7,
-      "interval": null,
-      "links": [],
-      "mappingType": 1,
-      "mappingTypes": [
-        {
-          "name": "value to text",
-          "value": 1
-        },
-        {
-          "name": "range to text",
-          "value": 2
-        }
-      ],
-      "maxDataPoints": 100,
-      "nullPointMode": "connected",
-      "nullText": null,
-      "postfix": "",
-      "postfixFontSize": "50%",
-      "prefix": "",
-      "prefixFontSize": "50%",
-      "rangeMaps": [
-        {
-          "from": "null",
-          "text": "N/A",
-          "to": "null"
-        }
-      ],
-      "sparkline": {
-        "fillColor": "rgba(31, 118, 189, 0.18)",
-        "full": false,
-        "lineColor": "rgb(31, 120, 193)",
-        "show": false
-      },
-      "tableColumn": "",
-      "targets": [
-        {
-          "alias": "$col",
-          "bucketAggs": [
-            {
-              "id": "2",
-              "settings": {
-                "interval": "auto"
-              },
-              "type": "date_histogram"
-            }
-          ],
-          "dsType": "influxdb",
-          "groupBy": [
-            {
-              "params": [
-                "$interval"
-              ],
-              "type": "time"
-            },
-            {
-              "params": [
-                "raidName"
-              ],
-              "type": "tag"
-            }
-          ],
-          "measurement": "raidTable",
-          "metrics": [
-            {
-              "id": "1",
-              "type": "count"
-            }
-          ],
-          "orderByTime": "ASC",
-          "policy": "default",
-          "refId": "A",
-          "resultFormat": "time_series",
-          "select": [
-            [
-              {
-                "params": [
-                  "raidStatus"
-                ],
-                "type": "field"
-              },
-              {
-                "params": [],
-                "type": "last"
-              }
-            ]
-          ],
-          "tags": [],
-          "timeField": "@timestamp"
-        }
-      ],
-      "thresholds": "11,12",
-      "title": "Raid Status",
-      "type": "singlestat",
-      "valueFontSize": "80%",
-      "valueMaps": [
-        {
-          "op": "=",
-          "text": "Normal",
-          "value": "1"
-        },
-        {
-          "op": "=",
-          "text": "Repairing",
-          "value": "2"
-        },
-        {
-          "op": "=",
-          "text": "Migrating",
-          "value": "3"
-        },
-        {
-          "op": "=",
-          "text": "Expanding",
-          "value": "4"
-        },
-        {
-          "op": "=",
-          "text": "Deleting",
-          "value": "5"
-        },
-        {
-          "op": "=",
-          "text": "Creating",
-          "value": "6"
-        },
-        {
-          "op": "=",
-          "text": "RaidSyncing",
-          "value": "7"
-        },
-        {
-          "op": "=",
-          "text": "RaidParityChecking",
-          "value": "8"
-        },
-        {
-          "op": "=",
-          "text": "RaidAssembling",
-          "value": "9"
-        },
-        {
-          "op": "=",
-          "text": "Canceling",
-          "value": "10"
-        },
-        {
-          "op": "=",
-          "text": "Degrade",
-          "value": "11"
-        },
-        {
-          "op": "=",
-          "text": "Crashed",
-          "value": "12"
-        },
-        {
-          "op": "=",
-          "text": "Scrubbing",
-          "value": "13"
-        },
-        {
-          "op": "=",
-          "text": "Deploying volume",
-          "value": "14"
-        }
-      ],
-      "valueName": "current"
-    },
-    {
-      "cacheTimeout": null,
-      "colorBackground": true,
-      "colorValue": false,
-      "colors": [
-        "#FF780A",
-        "rgba(237, 129, 40, 0.89)",
-        "rgba(50, 172, 45, 0.97)"
-      ],
-      "datasource": "influxdb",
-      "fieldConfig": {
-        "defaults": {
-          "custom": {}
-        },
-        "overrides": []
-      },
-      "format": "none",
-      "gauge": {
-        "maxValue": 100,
-        "minValue": 0,
-        "show": false,
-        "thresholdLabels": false,
-        "thresholdMarkers": true
-      },
-      "gridPos": {
-        "h": 3,
-        "w": 3,
-        "x": 3,
-        "y": 0
-      },
-      "id": 27,
-      "interval": null,
-      "links": [],
-      "mappingType": 1,
-      "mappingTypes": [
-        {
-          "name": "value to text",
-          "value": 1
-        },
-        {
-          "name": "range to text",
-          "value": 2
-        }
-      ],
-      "maxDataPoints": 100,
-      "nullPointMode": "connected",
-      "nullText": null,
-      "postfix": "",
-      "postfixFontSize": "50%",
-      "prefix": "",
-      "prefixFontSize": "50%",
-      "rangeMaps": [
-        {
-          "from": "null",
-          "text": "N/A",
-          "to": "null"
-        }
-      ],
-      "sparkline": {
-        "fillColor": "rgba(31, 118, 189, 0.18)",
-        "full": false,
-        "lineColor": "rgb(31, 120, 193)",
-        "show": false
-      },
-      "tableColumn": "",
-      "targets": [
-        {
-          "bucketAggs": [
-            {
-              "id": "2",
-              "settings": {
-                "interval": "auto"
-              },
-              "type": "date_histogram"
-            }
-          ],
-          "dsType": "influxdb",
-          "groupBy": [
-            {
-              "params": [
-                "agent_host"
-              ],
-              "type": "tag"
-            }
-          ],
-          "measurement": "snmp.SYNO",
-          "metrics": [
-            {
-              "id": "1",
-              "type": "count"
-            }
-          ],
-          "orderByTime": "ASC",
-          "policy": "default",
-          "refId": "A",
-          "resultFormat": "time_series",
-          "select": [
-            [
-              {
-                "params": [
-                  "upgradeAvailable"
-                ],
-                "type": "field"
-              }
-            ]
-          ],
-          "tags": [],
-          "timeField": "@timestamp"
-        }
-      ],
-      "thresholds": "2,2",
-      "title": "Upgrade Available",
-      "type": "singlestat",
-      "valueFontSize": "80%",
-      "valueMaps": [
-        {
-          "op": "=",
-          "text": "YES",
-          "value": "1"
-        },
-        {
-          "op": "=",
-          "text": "NO",
-          "value": "2"
-        }
-      ],
-      "valueName": "current"
-    },
-    {
-      "cacheTimeout": null,
-      "colorBackground": true,
-      "colorValue": false,
-      "colors": [
-        "rgba(50, 172, 45, 0.97)",
-        "rgba(237, 129, 40, 0.89)",
-        "rgba(245, 54, 54, 0.9)"
-      ],
-      "datasource": "influxdb",
-      "fieldConfig": {
-        "defaults": {
-          "custom": {}
-        },
-        "overrides": []
-      },
-      "format": "none",
-      "gauge": {
-        "maxValue": 100,
-        "minValue": 0,
-        "show": false,
-        "thresholdLabels": false,
-        "thresholdMarkers": true
-      },
-      "gridPos": {
-        "h": 3,
-        "w": 3,
-        "x": 6,
-        "y": 0
-      },
-      "id": 10,
-      "interval": null,
-      "links": [],
-      "mappingType": 1,
-      "mappingTypes": [
-        {
-          "name": "value to text",
-          "value": 1
-        },
-        {
-          "name": "range to text",
-          "value": 2
-        }
-      ],
-      "maxDataPoints": 100,
-      "nullPointMode": "connected",
-      "nullText": null,
-      "postfix": "",
-      "postfixFontSize": "50%",
-      "prefix": "",
-      "prefixFontSize": "50%",
-      "rangeMaps": [
-        {
-          "from": "null",
-          "text": "N/A",
-          "to": "null"
-        }
-      ],
-      "sparkline": {
-        "fillColor": "rgba(31, 118, 189, 0.18)",
-        "full": false,
-        "lineColor": "rgb(31, 120, 193)",
-        "show": false
-      },
-      "tableColumn": "",
-      "targets": [
-        {
-          "dsType": "influxdb",
-          "groupBy": [
-            {
-              "params": [
-                "$interval"
-              ],
-              "type": "time"
-            },
-            {
-              "params": [
-                "sysName"
-              ],
-              "type": "tag"
-            }
-          ],
-          "measurement": "snmp.SYNO",
-          "orderByTime": "ASC",
-          "policy": "default",
-          "refId": "A",
-          "resultFormat": "time_series",
-          "select": [
-            [
-              {
-                "params": [
-                  "systemStatus"
-                ],
-                "type": "field"
-              },
-              {
-                "params": [],
-                "type": "last"
-              }
-            ]
-          ],
-          "tags": []
-        }
-      ],
-      "thresholds": "2,2",
-      "title": "System overall status",
-      "type": "singlestat",
-      "valueFontSize": "80%",
-      "valueMaps": [
-        {
-          "op": "=",
-          "text": "Normal",
-          "value": "1"
-        },
-        {
-          "op": "=",
-          "text": "Failed",
-          "value": "2"
-        }
-      ],
-      "valueName": "current"
-    },
-    {
-      "cacheTimeout": null,
-      "colorBackground": false,
-      "colorValue": true,
-      "colors": [
-        "rgba(50, 172, 45, 0.97)",
-        "rgba(237, 129, 40, 0.89)",
-        "rgba(245, 54, 54, 0.9)"
-      ],
-      "datasource": "influxdb",
-      "fieldConfig": {
-        "defaults": {
-          "custom": {}
-        },
-        "overrides": []
-      },
-      "format": "none",
-      "gauge": {
-        "maxValue": 100,
-        "minValue": 0,
-        "show": true,
-        "thresholdLabels": false,
-        "thresholdMarkers": true
-      },
-      "gridPos": {
-        "h": 6,
-        "w": 3,
-        "x": 9,
-        "y": 0
-      },
-      "id": 11,
-      "interval": null,
-      "links": [],
-      "mappingType": 1,
-      "mappingTypes": [
-        {
-          "name": "value to text",
-          "value": 1
-        },
-        {
-          "name": "range to text",
-          "value": 2
-        }
-      ],
-      "maxDataPoints": 100,
-      "nullPointMode": "connected",
-      "nullText": null,
-      "postfix": "°C",
-      "postfixFontSize": "50%",
-      "prefix": "",
-      "prefixFontSize": "50%",
-      "rangeMaps": [
-        {
-          "from": "null",
-          "text": "N/A",
-          "to": "null"
-        }
-      ],
-      "sparkline": {
-        "fillColor": "rgba(31, 118, 189, 0.18)",
-        "full": false,
-        "lineColor": "rgb(31, 120, 193)",
-        "show": false
-      },
-      "tableColumn": "",
-      "targets": [
-        {
-          "bucketAggs": [
-            {
-              "id": "2",
-              "settings": {
-                "interval": "auto"
-              },
-              "type": "date_histogram"
-            }
-          ],
-          "dsType": "influxdb",
-          "groupBy": [
-            {
-              "params": [
-                "$interval"
-              ],
-              "type": "time"
-            }
-          ],
-          "hide": false,
-          "measurement": "snmp.SYNO",
-          "metrics": [
-            {
-              "id": "1",
-              "type": "count"
-            }
-          ],
-          "orderByTime": "ASC",
-          "policy": "default",
-          "refId": "A",
-          "resultFormat": "time_series",
-          "select": [
-            [
-              {
-                "params": [
-                  "temperature"
-                ],
-                "type": "field"
-              },
-              {
-                "params": [],
-                "type": "last"
-              }
-            ]
-          ],
-          "tags": [],
-          "timeField": "@timestamp"
-        }
-      ],
-      "thresholds": "50,75",
-      "title": "System temperature",
-      "type": "singlestat",
-      "valueFontSize": "80%",
-      "valueMaps": [
-        {
-          "op": "=",
-          "text": "N/A",
-          "value": "null"
-        }
-      ],
-      "valueName": "current"
-    },
-    {
-      "cacheTimeout": null,
-      "colorBackground": false,
-      "colorValue": false,
-      "colors": [
-        "#299c46",
-        "rgba(237, 129, 40, 0.89)",
-        "#d44a3a"
-      ],
-      "datasource": null,
-      "decimals": 2,
-      "fieldConfig": {
-        "defaults": {
-          "custom": {}
-        },
-        "overrides": []
-      },
-      "format": "decbytes",
-      "gauge": {
-        "maxValue": 12000000000000,
-        "minValue": 0,
-        "show": true,
-        "thresholdLabels": false,
-        "thresholdMarkers": true
-      },
-      "gridPos": {
-        "h": 6,
-        "w": 3,
-        "x": 12,
-        "y": 0
-      },
-      "id": 22,
-      "interval": null,
-      "links": [],
-      "mappingType": 1,
-      "mappingTypes": [
-        {
-          "name": "value to text",
-          "value": 1
-        },
-        {
-          "name": "range to text",
-          "value": 2
-        }
-      ],
-      "maxDataPoints": 100,
-      "nullPointMode": "connected",
-      "nullText": null,
-      "postfix": " / 11.5TB",
-      "postfixFontSize": "50%",
-      "prefix": "",
-      "prefixFontSize": "50%",
-      "rangeMaps": [
-        {
-          "from": "null",
-          "text": "N/A",
-          "to": "null"
-        }
-      ],
-      "sparkline": {
-        "fillColor": "rgba(31, 118, 189, 0.18)",
-        "full": false,
-        "lineColor": "rgb(31, 120, 193)",
-        "show": false
-      },
-      "tableColumn": "",
-      "targets": [
-        {
-          "groupBy": [
-            {
-              "params": [
-                "$__interval"
-              ],
-              "type": "time"
-            },
-            {
-              "params": [
-                "null"
-              ],
-              "type": "fill"
-            }
-          ],
-          "measurement": "raidTable",
-          "orderByTime": "ASC",
-          "policy": "default",
-          "query": "SELECT -1*(last(\"raidFreeSize\") -11500000000000) AS \"SizeUsed\" FROM \"raidTable\" WHERE $timeFilter GROUP BY time($__interval) fill(previous)",
-          "rawQuery": false,
-          "refId": "A",
-          "resultFormat": "time_series",
-          "select": [
-            [
-              {
-                "params": [
-                  "raidFreeSize"
-                ],
-                "type": "field"
-              },
-              {
-                "params": [],
-                "type": "last"
-              },
-              {
-                "params": [
-                  " / 1000000000"
-                ],
-                "type": "math"
-              }
-            ]
-          ],
-          "tags": []
-        }
-      ],
-      "thresholds": "7000000000000,9000000000000",
-      "title": "Used Capacity",
-      "type": "singlestat",
-      "valueFontSize": "30%",
-      "valueMaps": [
-        {
-          "op": "=",
-          "text": "N/A",
-          "value": "null"
-        }
-      ],
-      "valueName": "current"
-    },
-    {
-      "cacheTimeout": null,
-      "colorBackground": false,
-      "colorValue": false,
-      "colors": [
-        "#299c46",
-        "rgba(237, 129, 40, 0.89)",
-        "#d44a3a"
-      ],
-      "datasource": "influxdb",
-      "decimals": 1,
-      "fieldConfig": {
-        "defaults": {
-          "custom": {}
-        },
-        "overrides": []
-      },
-      "format": "dtdurations",
-      "gauge": {
-        "maxValue": 100,
-        "minValue": 0,
-        "show": false,
-        "thresholdLabels": false,
-        "thresholdMarkers": true
-      },
-      "gridPos": {
-        "h": 3,
-        "w": 4,
-        "x": 15,
-        "y": 0
-      },
-      "id": 16,
-      "interval": null,
-      "links": [],
-      "mappingType": 1,
-      "mappingTypes": [
-        {
-          "name": "value to text",
-          "value": 1
-        },
-        {
-          "name": "range to text",
-          "value": 2
-        }
-      ],
-      "maxDataPoints": 100,
-      "nullPointMode": "connected",
-      "nullText": null,
-      "postfix": "",
-      "postfixFontSize": "50%",
-      "prefix": "",
-      "prefixFontSize": "50%",
-      "rangeMaps": [
-        {
-          "from": "null",
-          "text": "N/A",
-          "to": "null"
-        }
-      ],
-      "sparkline": {
-        "fillColor": "rgba(31, 118, 189, 0.18)",
-        "full": false,
-        "lineColor": "rgb(31, 120, 193)",
-        "show": false
-      },
-      "tableColumn": "",
-      "targets": [
-        {
-          "alias": "",
-          "groupBy": [
-            {
-              "params": [
-                "$__interval"
-              ],
-              "type": "time"
-            },
-            {
-              "params": [
-                "null"
-              ],
-              "type": "fill"
-            }
-          ],
-          "measurement": "snmp.SYNO",
-          "orderByTime": "ASC",
-          "policy": "default",
-          "refId": "A",
-          "resultFormat": "time_series",
-          "select": [
-            [
-              {
-                "params": [
-                  "sysUpTime"
-                ],
-                "type": "field"
-              },
-              {
-                "params": [],
-                "type": "last"
-              },
-              {
-                "params": [
-                  " / 100"
-                ],
-                "type": "math"
-              },
-              {
-                "params": [
-                  "DS416Play"
-                ],
-                "type": "alias"
-              }
-            ]
-          ],
-          "tags": []
-        }
-      ],
-      "thresholds": "",
-      "title": "DS918+ Play Uptime",
-      "type": "singlestat",
-      "valueFontSize": "80%",
-      "valueMaps": [
-        {
-          "op": "=",
-          "text": "N/A",
-          "value": "null"
-        }
-      ],
-      "valueName": "current"
-    },
-    {
       "columns": [],
-      "datasource": "influxdb",
+      "datasource": "${DS_INFLUXDB}",
       "fieldConfig": {
         "defaults": {
           "custom": {}
@@ -864,8 +92,8 @@
       "fontSize": "100%",
       "gridPos": {
         "h": 3,
-        "w": 5,
-        "x": 19,
+        "w": 9,
+        "x": 0,
         "y": 0
       },
       "id": 6,
@@ -879,6 +107,7 @@
       },
       "styles": [
         {
+          "$$hashKey": "object:3881",
           "align": "auto",
           "dateFormat": "YYYY-MM-DD HH:mm:ss",
           "link": false,
@@ -886,6 +115,7 @@
           "type": "hidden"
         },
         {
+          "$$hashKey": "object:3882",
           "align": "auto",
           "colorMode": null,
           "colors": [
@@ -912,7 +142,7 @@
               "type": "date_histogram"
             }
           ],
-          "dsType": "influxdb",
+          "dsType": "InfluxDB",
           "groupBy": [],
           "measurement": "snmp.SYNO",
           "metrics": [
@@ -967,8 +197,9 @@
           "timeField": "@timestamp"
         }
       ],
-      "title": "Synology DS918+Play NAS",
+      "title": "Synology NAS",
       "transform": "table",
+      "transparent": true,
       "type": "table-old"
     },
     {
@@ -980,7 +211,7 @@
         "rgba(237, 129, 40, 0.89)",
         "rgba(245, 54, 54, 0.9)"
       ],
-      "datasource": "influxdb",
+      "datasource": "${DS_INFLUXDB}",
       "fieldConfig": {
         "defaults": {
           "custom": {}
@@ -996,10 +227,10 @@
         "thresholdMarkers": true
       },
       "gridPos": {
-        "h": 3,
+        "h": 2,
         "w": 3,
-        "x": 0,
-        "y": 3
+        "x": 9,
+        "y": 0
       },
       "id": 13,
       "interval": null,
@@ -1007,10 +238,12 @@
       "mappingType": 1,
       "mappingTypes": [
         {
+          "$$hashKey": "object:1652",
           "name": "value to text",
           "value": 1
         },
         {
+          "$$hashKey": "object:1653",
           "name": "range to text",
           "value": 2
         }
@@ -1047,7 +280,7 @@
               "type": "date_histogram"
             }
           ],
-          "dsType": "influxdb",
+          "dsType": "InfluxDB",
           "groupBy": [],
           "measurement": "snmp.SYNO",
           "metrics": [
@@ -1077,14 +310,16 @@
       "thresholds": "2,2",
       "title": "System fan status",
       "type": "singlestat",
-      "valueFontSize": "80%",
+      "valueFontSize": "50%",
       "valueMaps": [
         {
+          "$$hashKey": "object:1655",
           "op": "=",
           "text": "Normal",
           "value": "1"
         },
         {
+          "$$hashKey": "object:1656",
           "op": "=",
           "text": "Failed",
           "value": "2"
@@ -1101,7 +336,7 @@
         "rgba(237, 129, 40, 0.89)",
         "rgba(245, 54, 54, 0.9)"
       ],
-      "datasource": "influxdb",
+      "datasource": "${DS_INFLUXDB}",
       "fieldConfig": {
         "defaults": {
           "custom": {}
@@ -1117,144 +352,10 @@
         "thresholdMarkers": true
       },
       "gridPos": {
-        "h": 3,
+        "h": 2,
         "w": 3,
-        "x": 3,
-        "y": 3
-      },
-      "id": 12,
-      "interval": null,
-      "links": [],
-      "mappingType": 1,
-      "mappingTypes": [
-        {
-          "name": "value to text",
-          "value": 1
-        },
-        {
-          "name": "range to text",
-          "value": 2
-        }
-      ],
-      "maxDataPoints": 100,
-      "nullPointMode": "connected",
-      "nullText": null,
-      "postfix": "",
-      "postfixFontSize": "50%",
-      "prefix": "",
-      "prefixFontSize": "50%",
-      "rangeMaps": [
-        {
-          "from": "null",
-          "text": "N/A",
-          "to": "null"
-        }
-      ],
-      "sparkline": {
-        "fillColor": "rgba(31, 118, 189, 0.18)",
-        "full": false,
-        "lineColor": "rgb(31, 120, 193)",
-        "show": false
-      },
-      "tableColumn": "",
-      "targets": [
-        {
-          "bucketAggs": [
-            {
-              "id": "2",
-              "settings": {
-                "interval": "auto"
-              },
-              "type": "date_histogram"
-            }
-          ],
-          "dsType": "influxdb",
-          "groupBy": [
-            {
-              "params": [
-                "agent_host"
-              ],
-              "type": "tag"
-            }
-          ],
-          "measurement": "snmp.SYNO",
-          "metrics": [
-            {
-              "id": "1",
-              "type": "count"
-            }
-          ],
-          "orderByTime": "ASC",
-          "policy": "default",
-          "refId": "A",
-          "resultFormat": "time_series",
-          "select": [
-            [
-              {
-                "params": [
-                  "cpuFanStatus"
-                ],
-                "type": "field"
-              }
-            ]
-          ],
-          "tags": [
-            {
-              "key": "agent_host",
-              "operator": "=",
-              "value": "192.168.86.149"
-            }
-          ],
-          "timeField": "@timestamp"
-        }
-      ],
-      "thresholds": "2,2",
-      "title": "CPU fan status",
-      "type": "singlestat",
-      "valueFontSize": "80%",
-      "valueMaps": [
-        {
-          "op": "=",
-          "text": "Normal",
-          "value": "1"
-        },
-        {
-          "op": "=",
-          "text": "Failed",
-          "value": "2"
-        }
-      ],
-      "valueName": "current"
-    },
-    {
-      "cacheTimeout": null,
-      "colorBackground": true,
-      "colorValue": false,
-      "colors": [
-        "rgba(50, 172, 45, 0.97)",
-        "rgba(237, 129, 40, 0.89)",
-        "rgba(245, 54, 54, 0.9)"
-      ],
-      "datasource": "influxdb",
-      "fieldConfig": {
-        "defaults": {
-          "custom": {}
-        },
-        "overrides": []
-      },
-      "format": "none",
-      "gauge": {
-        "maxValue": 100,
-        "minValue": 0,
-        "show": false,
-        "thresholdLabels": false,
-        "thresholdMarkers": true
-      },
-      "gridPos": {
-        "h": 3,
-        "w": 3,
-        "x": 6,
-        "y": 3
+        "x": 12,
+        "y": 0
       },
       "id": 25,
       "interval": null,
@@ -1262,10 +363,12 @@
       "mappingType": 1,
       "mappingTypes": [
         {
+          "$$hashKey": "object:1892",
           "name": "value to text",
           "value": 1
         },
         {
+          "$$hashKey": "object:1893",
           "name": "range to text",
           "value": 2
         }
@@ -1302,7 +405,7 @@
               "type": "date_histogram"
             }
           ],
-          "dsType": "influxdb",
+          "dsType": "InfluxDB",
           "groupBy": [
             {
               "params": [
@@ -1339,14 +442,16 @@
       "thresholds": "2,2",
       "title": "Power Status",
       "type": "singlestat",
-      "valueFontSize": "80%",
+      "valueFontSize": "50%",
       "valueMaps": [
         {
+          "$$hashKey": "object:1895",
           "op": "=",
           "text": "Normal",
           "value": "1"
         },
         {
+          "$$hashKey": "object:1896",
           "op": "=",
           "text": "Failed",
           "value": "2"
@@ -1355,67 +460,198 @@
       "valueName": "current"
     },
     {
-      "columns": [],
-      "datasource": "influxdb",
+      "cacheTimeout": null,
+      "colorBackground": true,
+      "colorValue": false,
+      "colors": [
+        "rgba(50, 172, 45, 0.97)",
+        "rgba(237, 129, 40, 0.89)",
+        "rgba(245, 54, 54, 0.9)"
+      ],
+      "datasource": "${DS_INFLUXDB}",
       "fieldConfig": {
         "defaults": {
           "custom": {}
         },
         "overrides": []
       },
-      "fontSize": "100%",
+      "format": "none",
+      "gauge": {
+        "maxValue": 100,
+        "minValue": 0,
+        "show": false,
+        "thresholdLabels": false,
+        "thresholdMarkers": true
+      },
       "gridPos": {
-        "h": 3,
-        "w": 9,
+        "h": 2,
+        "w": 3,
         "x": 15,
-        "y": 3
+        "y": 0
       },
-      "id": 29,
+      "id": 10,
+      "interval": null,
       "links": [],
-      "pageSize": null,
-      "scroll": false,
-      "showHeader": true,
-      "sort": {
-        "col": 0,
-        "desc": true
-      },
-      "styles": [
+      "mappingType": 1,
+      "mappingTypes": [
         {
-          "align": "auto",
-          "dateFormat": "YYYY-MM-DD HH:mm:ss",
-          "link": false,
-          "pattern": "Time",
-          "type": "hidden"
+          "$$hashKey": "object:1824",
+          "name": "value to text",
+          "value": 1
         },
         {
-          "align": "auto",
-          "colorMode": "cell",
-          "colors": [
-            "rgba(245, 54, 54, 0.9)",
-            "#FF780A",
-            "rgba(50, 172, 45, 0.97)"
-          ],
-          "decimals": 2,
-          "mappingType": 1,
-          "pattern": "/.*/",
-          "thresholds": [
-            "0",
-            "1"
-          ],
-          "type": "string",
-          "unit": "short",
-          "valueMaps": [
-            {
-              "text": "YES",
-              "value": "1"
-            },
-            {
-              "text": "NO",
-              "value": "0"
-            }
-          ]
+          "$$hashKey": "object:1825",
+          "name": "range to text",
+          "value": 2
         }
       ],
+      "maxDataPoints": 100,
+      "nullPointMode": "connected",
+      "nullText": null,
+      "postfix": "",
+      "postfixFontSize": "50%",
+      "prefix": "",
+      "prefixFontSize": "50%",
+      "rangeMaps": [
+        {
+          "from": "null",
+          "text": "N/A",
+          "to": "null"
+        }
+      ],
+      "sparkline": {
+        "fillColor": "rgba(31, 118, 189, 0.18)",
+        "full": false,
+        "lineColor": "rgb(31, 120, 193)",
+        "show": false
+      },
+      "tableColumn": "",
+      "targets": [
+        {
+          "dsType": "InfluxDB",
+          "groupBy": [
+            {
+              "params": [
+                "$interval"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "sysName"
+              ],
+              "type": "tag"
+            }
+          ],
+          "measurement": "snmp.SYNO",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "A",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "systemStatus"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "last"
+              }
+            ]
+          ],
+          "tags": []
+        }
+      ],
+      "thresholds": "2,2",
+      "title": "System overall status",
+      "type": "singlestat",
+      "valueFontSize": "50%",
+      "valueMaps": [
+        {
+          "$$hashKey": "object:1827",
+          "op": "=",
+          "text": "Normal",
+          "value": "1"
+        },
+        {
+          "$$hashKey": "object:1828",
+          "op": "=",
+          "text": "Failed",
+          "value": "2"
+        }
+      ],
+      "valueName": "current"
+    },
+    {
+      "cacheTimeout": null,
+      "colorBackground": true,
+      "colorValue": false,
+      "colors": [
+        "rgba(50, 172, 45, 0.97)",
+        "rgba(237, 129, 40, 0.89)",
+        "rgba(245, 54, 54, 0.9)"
+      ],
+      "datasource": "${DS_INFLUXDB}",
+      "fieldConfig": {
+        "defaults": {
+          "custom": {}
+        },
+        "overrides": []
+      },
+      "format": "none",
+      "gauge": {
+        "maxValue": 100,
+        "minValue": 0,
+        "show": false,
+        "thresholdLabels": false,
+        "thresholdMarkers": true
+      },
+      "gridPos": {
+        "h": 2,
+        "w": 3,
+        "x": 18,
+        "y": 0
+      },
+      "id": 7,
+      "interval": null,
+      "links": [],
+      "mappingType": 1,
+      "mappingTypes": [
+        {
+          "$$hashKey": "object:1726",
+          "name": "value to text",
+          "value": 1
+        },
+        {
+          "$$hashKey": "object:1727",
+          "name": "range to text",
+          "value": 2
+        }
+      ],
+      "maxDataPoints": 100,
+      "nullPointMode": "connected",
+      "nullText": null,
+      "postfix": "",
+      "postfixFontSize": "50%",
+      "prefix": "",
+      "prefixFontSize": "50%",
+      "rangeMaps": [
+        {
+          "from": "null",
+          "text": "N/A",
+          "to": "null"
+        }
+      ],
+      "sparkline": {
+        "fillColor": "rgba(31, 118, 189, 0.18)",
+        "full": false,
+        "lineColor": "rgb(31, 120, 193)",
+        "show": false
+      },
+      "tableColumn": "",
       "targets": [
         {
           "alias": "$col",
@@ -1428,7 +664,1002 @@
               "type": "date_histogram"
             }
           ],
-          "dsType": "influxdb",
+          "dsType": "InfluxDB",
+          "groupBy": [
+            {
+              "params": [
+                "$interval"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "raidName"
+              ],
+              "type": "tag"
+            }
+          ],
+          "measurement": "raidTable",
+          "metrics": [
+            {
+              "id": "1",
+              "type": "count"
+            }
+          ],
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "A",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "raidStatus"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "last"
+              }
+            ]
+          ],
+          "tags": [],
+          "timeField": "@timestamp"
+        }
+      ],
+      "thresholds": "11,12",
+      "title": "Raid Status",
+      "type": "singlestat",
+      "valueFontSize": "50%",
+      "valueMaps": [
+        {
+          "$$hashKey": "object:1729",
+          "op": "=",
+          "text": "Normal",
+          "value": "1"
+        },
+        {
+          "$$hashKey": "object:1730",
+          "op": "=",
+          "text": "Repairing",
+          "value": "2"
+        },
+        {
+          "$$hashKey": "object:1731",
+          "op": "=",
+          "text": "Migrating",
+          "value": "3"
+        },
+        {
+          "$$hashKey": "object:1732",
+          "op": "=",
+          "text": "Expanding",
+          "value": "4"
+        },
+        {
+          "$$hashKey": "object:1733",
+          "op": "=",
+          "text": "Deleting",
+          "value": "5"
+        },
+        {
+          "$$hashKey": "object:1734",
+          "op": "=",
+          "text": "Creating",
+          "value": "6"
+        },
+        {
+          "$$hashKey": "object:1735",
+          "op": "=",
+          "text": "RaidSyncing",
+          "value": "7"
+        },
+        {
+          "$$hashKey": "object:1736",
+          "op": "=",
+          "text": "RaidParityChecking",
+          "value": "8"
+        },
+        {
+          "$$hashKey": "object:1737",
+          "op": "=",
+          "text": "RaidAssembling",
+          "value": "9"
+        },
+        {
+          "$$hashKey": "object:1738",
+          "op": "=",
+          "text": "Canceling",
+          "value": "10"
+        },
+        {
+          "$$hashKey": "object:1739",
+          "op": "=",
+          "text": "Degrade",
+          "value": "11"
+        },
+        {
+          "$$hashKey": "object:1740",
+          "op": "=",
+          "text": "Crashed",
+          "value": "12"
+        },
+        {
+          "$$hashKey": "object:1741",
+          "op": "=",
+          "text": "Scrubbing",
+          "value": "13"
+        },
+        {
+          "$$hashKey": "object:1742",
+          "op": "=",
+          "text": "Deploying volume",
+          "value": "14"
+        }
+      ],
+      "valueName": "current"
+    },
+    {
+      "cacheTimeout": null,
+      "colorBackground": true,
+      "colorValue": false,
+      "colors": [
+        "#FF780A",
+        "rgba(237, 129, 40, 0.89)",
+        "rgba(50, 172, 45, 0.97)"
+      ],
+      "datasource": "${DS_INFLUXDB}",
+      "fieldConfig": {
+        "defaults": {
+          "custom": {}
+        },
+        "overrides": []
+      },
+      "format": "none",
+      "gauge": {
+        "maxValue": 100,
+        "minValue": 0,
+        "show": false,
+        "thresholdLabels": false,
+        "thresholdMarkers": true
+      },
+      "gridPos": {
+        "h": 2,
+        "w": 3,
+        "x": 21,
+        "y": 0
+      },
+      "id": 27,
+      "interval": null,
+      "links": [],
+      "mappingType": 1,
+      "mappingTypes": [
+        {
+          "$$hashKey": "object:1960",
+          "name": "value to text",
+          "value": 1
+        },
+        {
+          "$$hashKey": "object:1961",
+          "name": "range to text",
+          "value": 2
+        }
+      ],
+      "maxDataPoints": 100,
+      "nullPointMode": "connected",
+      "nullText": null,
+      "postfix": "",
+      "postfixFontSize": "50%",
+      "prefix": "",
+      "prefixFontSize": "50%",
+      "rangeMaps": [
+        {
+          "from": "null",
+          "text": "N/A",
+          "to": "null"
+        }
+      ],
+      "sparkline": {
+        "fillColor": "rgba(31, 118, 189, 0.18)",
+        "full": false,
+        "lineColor": "rgb(31, 120, 193)",
+        "show": false
+      },
+      "tableColumn": "",
+      "targets": [
+        {
+          "bucketAggs": [
+            {
+              "id": "2",
+              "settings": {
+                "interval": "auto"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "dsType": "InfluxDB",
+          "groupBy": [
+            {
+              "params": [
+                "agent_host"
+              ],
+              "type": "tag"
+            }
+          ],
+          "measurement": "snmp.SYNO",
+          "metrics": [
+            {
+              "id": "1",
+              "type": "count"
+            }
+          ],
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "A",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "upgradeAvailable"
+                ],
+                "type": "field"
+              }
+            ]
+          ],
+          "tags": [],
+          "timeField": "@timestamp"
+        }
+      ],
+      "thresholds": "2,2",
+      "title": "Upgrade Available",
+      "type": "singlestat",
+      "valueFontSize": "50%",
+      "valueMaps": [
+        {
+          "$$hashKey": "object:1963",
+          "op": "=",
+          "text": "YES",
+          "value": "1"
+        },
+        {
+          "$$hashKey": "object:1964",
+          "op": "=",
+          "text": "NO",
+          "value": "2"
+        }
+      ],
+      "valueName": "current"
+    },
+    {
+      "cacheTimeout": null,
+      "datasource": "${DS_INFLUXDB}",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {},
+          "mappings": [
+            {
+              "$$hashKey": "object:2718",
+              "id": 0,
+              "op": "=",
+              "text": "N/A",
+              "type": 1,
+              "value": "null"
+            }
+          ],
+          "max": 100,
+          "min": 0,
+          "nullValueMode": "connected",
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "rgba(50, 172, 45, 0.97)",
+                "value": null
+              },
+              {
+                "color": "yellow",
+                "value": 50
+              },
+              {
+                "color": "rgba(245, 54, 54, 0.9)",
+                "value": 75
+              }
+            ]
+          },
+          "unit": "celsius"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 3,
+        "x": 9,
+        "y": 2
+      },
+      "id": 11,
+      "interval": null,
+      "links": [],
+      "maxDataPoints": 100,
+      "options": {
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showThresholdLabels": false,
+        "showThresholdMarkers": true
+      },
+      "pluginVersion": "7.3.5",
+      "targets": [
+        {
+          "bucketAggs": [
+            {
+              "id": "2",
+              "settings": {
+                "interval": "auto"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "dsType": "InfluxDB",
+          "groupBy": [
+            {
+              "params": [
+                "$interval"
+              ],
+              "type": "time"
+            }
+          ],
+          "hide": false,
+          "measurement": "snmp.SYNO",
+          "metrics": [
+            {
+              "id": "1",
+              "type": "count"
+            }
+          ],
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "A",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "temperature"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "last"
+              }
+            ]
+          ],
+          "tags": [],
+          "timeField": "@timestamp"
+        }
+      ],
+      "title": "System temperature",
+      "type": "gauge"
+    },
+    {
+      "cacheTimeout": null,
+      "datasource": "${DS_INFLUXDB}",
+      "fieldConfig": {
+        "defaults": {
+          "custom": {},
+          "decimals": 2,
+          "mappings": [
+            {
+              "$$hashKey": "object:2799",
+              "id": 0,
+              "op": "=",
+              "text": "N/A",
+              "type": 1,
+              "value": "null"
+            }
+          ],
+          "min": 0,
+          "nullValueMode": "connected",
+          "thresholds": {
+            "mode": "percentage",
+            "steps": [
+              {
+                "color": "#299c46",
+                "value": null
+              },
+              {
+                "color": "#EAB839",
+                "value": 50
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "decbytes"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 3,
+        "x": 12,
+        "y": 2
+      },
+      "id": 22,
+      "interval": null,
+      "links": [],
+      "maxDataPoints": 100,
+      "options": {
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "/^disk\\.last$/",
+          "values": false
+        },
+        "showThresholdLabels": false,
+        "showThresholdMarkers": true
+      },
+      "pluginVersion": "7.3.5",
+      "targets": [
+        {
+          "groupBy": [
+            {
+              "params": [
+                "$__interval"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "null"
+              ],
+              "type": "fill"
+            }
+          ],
+          "measurement": "disk",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "queryType": "randomWalk",
+          "refId": "A",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "used"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "last"
+              }
+            ],
+            [
+              {
+                "params": [
+                  "total"
+                ],
+                "type": "field"
+              }
+            ]
+          ],
+          "tags": []
+        }
+      ],
+      "title": "Used Capacity",
+      "type": "gauge"
+    },
+    {
+      "cacheTimeout": null,
+      "datasource": "${DS_INFLUXDB}",
+      "fieldConfig": {
+        "defaults": {
+          "custom": {},
+          "decimals": 2,
+          "mappings": [
+            {
+              "$$hashKey": "object:2799",
+              "id": 0,
+              "op": "=",
+              "text": "N/A",
+              "type": 1,
+              "value": "null"
+            }
+          ],
+          "min": 0,
+          "nullValueMode": "connected",
+          "thresholds": {
+            "mode": "percentage",
+            "steps": [
+              {
+                "color": "#299c46",
+                "value": null
+              },
+              {
+                "color": "#EAB839",
+                "value": 50
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "decbytes"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 3,
+        "x": 15,
+        "y": 2
+      },
+      "id": 41,
+      "interval": null,
+      "links": [],
+      "maxDataPoints": 100,
+      "options": {
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "/^disk\\.last$/",
+          "values": false
+        },
+        "showThresholdLabels": false,
+        "showThresholdMarkers": true
+      },
+      "pluginVersion": "7.3.5",
+      "targets": [
+        {
+          "groupBy": [
+            {
+              "params": [
+                "$__interval"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "null"
+              ],
+              "type": "fill"
+            }
+          ],
+          "measurement": "raidTable",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "queryType": "randomWalk",
+          "refId": "A",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "raidFreeSize"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "last"
+              }
+            ],
+            [
+              {
+                "params": [
+                  "raidTotalSize"
+                ],
+                "type": "field"
+              }
+            ]
+          ],
+          "tags": []
+        }
+      ],
+      "title": "Used Capacity",
+      "type": "gauge"
+    },
+    {
+      "datasource": "${DS_INFLUXDB}",
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "custom": {},
+          "mappings": [],
+          "max": 100,
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "#EAB839",
+                "value": 50
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "percent"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 3,
+        "x": 18,
+        "y": 2
+      },
+      "id": 39,
+      "options": {
+        "reduceOptions": {
+          "calcs": [
+            "last"
+          ],
+          "fields": "/^cpu\\.last$/",
+          "values": false
+        },
+        "showThresholdLabels": false,
+        "showThresholdMarkers": true
+      },
+      "pluginVersion": "7.3.5",
+      "targets": [
+        {
+          "groupBy": [
+            {
+              "params": [
+                "$__interval"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "previous"
+              ],
+              "type": "fill"
+            }
+          ],
+          "measurement": "cpu",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "queryType": "randomWalk",
+          "refId": "A",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "usage_system"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "last"
+              }
+            ]
+          ],
+          "tags": []
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "CPU",
+      "type": "gauge"
+    },
+    {
+      "datasource": "${DS_INFLUXDB}",
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {},
+          "decimals": 0,
+          "mappings": [],
+          "max": 100,
+          "min": 0,
+          "thresholds": {
+            "mode": "percentage",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "#EAB839",
+                "value": 50
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "percent"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 3,
+        "x": 21,
+        "y": 2
+      },
+      "id": 37,
+      "options": {
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "last"
+          ],
+          "fields": "/^mem\\.last$/",
+          "values": false
+        },
+        "showThresholdLabels": false,
+        "showThresholdMarkers": true
+      },
+      "pluginVersion": "7.3.5",
+      "targets": [
+        {
+          "groupBy": [
+            {
+              "params": [
+                "$__interval"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "previous"
+              ],
+              "type": "fill"
+            }
+          ],
+          "measurement": "mem",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "queryType": "randomWalk",
+          "refId": "A",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "used_percent"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "last"
+              }
+            ]
+          ],
+          "tags": []
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "Ram ",
+      "type": "gauge"
+    },
+    {
+      "cacheTimeout": null,
+      "colorBackground": false,
+      "colorValue": false,
+      "colors": [
+        "#299c46",
+        "rgba(237, 129, 40, 0.89)",
+        "#d44a3a"
+      ],
+      "datasource": "${DS_INFLUXDB}",
+      "decimals": 1,
+      "fieldConfig": {
+        "defaults": {
+          "custom": {}
+        },
+        "overrides": []
+      },
+      "format": "dtdurations",
+      "gauge": {
+        "maxValue": 100,
+        "minValue": 0,
+        "show": false,
+        "thresholdLabels": false,
+        "thresholdMarkers": true
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 9,
+        "x": 0,
+        "y": 3
+      },
+      "id": 16,
+      "interval": null,
+      "links": [],
+      "mappingType": 1,
+      "mappingTypes": [
+        {
+          "$$hashKey": "object:4104",
+          "name": "value to text",
+          "value": 1
+        },
+        {
+          "$$hashKey": "object:4105",
+          "name": "range to text",
+          "value": 2
+        }
+      ],
+      "maxDataPoints": 100,
+      "nullPointMode": "connected",
+      "nullText": null,
+      "postfix": "",
+      "postfixFontSize": "50%",
+      "prefix": "",
+      "prefixFontSize": "50%",
+      "rangeMaps": [
+        {
+          "from": "null",
+          "text": "N/A",
+          "to": "null"
+        }
+      ],
+      "sparkline": {
+        "fillColor": "rgba(31, 118, 189, 0.18)",
+        "full": false,
+        "lineColor": "rgb(31, 120, 193)",
+        "show": false
+      },
+      "tableColumn": "",
+      "targets": [
+        {
+          "alias": "",
+          "groupBy": [
+            {
+              "params": [
+                "$__interval"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "null"
+              ],
+              "type": "fill"
+            }
+          ],
+          "measurement": "system",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "A",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "uptime"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "last"
+              }
+            ]
+          ],
+          "tags": []
+        }
+      ],
+      "thresholds": "",
+      "title": "NAS Uptime",
+      "type": "singlestat",
+      "valueFontSize": "80%",
+      "valueMaps": [
+        {
+          "$$hashKey": "object:4107",
+          "op": "=",
+          "text": "N/A",
+          "value": "null"
+        }
+      ],
+      "valueName": "current"
+    },
+    {
+      "datasource": "${DS_INFLUXDB}",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "align": "center",
+            "displayMode": "color-background",
+            "filterable": false
+          },
+          "mappings": [],
+          "max": 1,
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "yellow",
+                "value": 0
+              },
+              {
+                "color": "dark-green",
+                "value": 1
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 9,
+        "x": 0,
+        "y": 6
+      },
+      "id": 29,
+      "links": [],
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "mean"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto"
+      },
+      "pluginVersion": "7.3.5",
+      "targets": [
+        {
+          "alias": "$col",
+          "bucketAggs": [
+            {
+              "id": "2",
+              "settings": {
+                "interval": "auto"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "dsType": "InfluxDB",
           "groupBy": [],
           "measurement": "snmp.SYNO",
           "metrics": [
@@ -1575,13 +1806,12 @@
           "timeField": "@timestamp"
         }
       ],
-      "title": "Servicess",
-      "transform": "table",
-      "type": "table-old"
+      "title": "Connected Users/Servicess",
+      "type": "stat"
     },
     {
       "columns": [],
-      "datasource": "influxdb",
+      "datasource": "${DS_INFLUXDB}",
       "fieldConfig": {
         "defaults": {
           "custom": {}
@@ -1590,10 +1820,10 @@
       },
       "fontSize": "100%",
       "gridPos": {
-        "h": 5,
+        "h": 9,
         "w": 11,
         "x": 0,
-        "y": 6
+        "y": 9
       },
       "id": 8,
       "links": [],
@@ -1606,12 +1836,14 @@
       },
       "styles": [
         {
+          "$$hashKey": "object:585",
           "align": "auto",
           "dateFormat": "YYYY-MM-DD HH:mm:ss",
           "pattern": "Time",
           "type": "hidden"
         },
         {
+          "$$hashKey": "object:586",
           "align": "auto",
           "colorMode": null,
           "colors": [
@@ -1626,6 +1858,8 @@
           "unit": "short"
         },
         {
+          "$$hashKey": "object:587",
+          "alias": "",
           "align": "auto",
           "colorMode": "cell",
           "colors": [
@@ -1635,15 +1869,39 @@
           ],
           "dateFormat": "YYYY-MM-DD HH:mm:ss",
           "decimals": 0,
+          "mappingType": 1,
           "pattern": "Status",
           "thresholds": [
             "4",
             "5"
           ],
-          "type": "number",
-          "unit": "short"
+          "type": "string",
+          "unit": "short",
+          "valueMaps": [
+            {
+              "$$hashKey": "object:643",
+              "text": "Fail",
+              "value": "0"
+            },
+            {
+              "$$hashKey": "object:644",
+              "text": "OK",
+              "value": "1"
+            },
+            {
+              "$$hashKey": "object:678",
+              "text": "Initialized",
+              "value": "2"
+            },
+            {
+              "$$hashKey": "object:680",
+              "text": "Not initialized",
+              "value": "3"
+            }
+          ]
         },
         {
+          "$$hashKey": "object:588",
           "align": "auto",
           "colorMode": "cell",
           "colors": [
@@ -1673,7 +1931,7 @@
               "type": "date_histogram"
             }
           ],
-          "dsType": "influxdb",
+          "dsType": "InfluxDB",
           "groupBy": [
             {
               "params": [
@@ -1816,20 +2074,22 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": null,
+      "datasource": "${DS_INFLUXDB}",
+      "description": "",
       "fieldConfig": {
         "defaults": {
-          "custom": {}
+          "custom": {},
+          "links": []
         },
         "overrides": []
       },
-      "fill": 1,
-      "fillGradient": 0,
+      "fill": 2,
+      "fillGradient": 1,
       "gridPos": {
-        "h": 5,
+        "h": 6,
         "w": 13,
         "x": 11,
-        "y": 6
+        "y": 9
       },
       "hiddenSeries": false,
       "id": 20,
@@ -1837,26 +2097,28 @@
         "alignAsTable": true,
         "avg": false,
         "current": true,
-        "max": false,
-        "min": false,
-        "rightSide": false,
-        "show": false,
+        "max": true,
+        "min": true,
+        "rightSide": true,
+        "show": true,
         "total": false,
         "values": true
       },
       "lines": true,
-      "linewidth": 2,
+      "linewidth": 1,
       "links": [],
       "nullPointMode": "null",
       "options": {
-        "dataLinks": []
+        "alertThreshold": true
       },
       "percentage": false,
+      "pluginVersion": "7.3.5",
       "pointradius": 5,
       "points": false,
       "renderer": "flot",
       "seriesOverrides": [
         {
+          "$$hashKey": "object:5581",
           "alias": "raidTable.SizeUsed",
           "color": "#c15c17"
         }
@@ -1866,33 +2128,31 @@
       "steppedLine": false,
       "targets": [
         {
-          "alias": "",
           "groupBy": [
             {
               "params": [
-                "$__interval"
+                "1s"
               ],
               "type": "time"
             },
             {
               "params": [
-                "previous"
+                "none"
               ],
               "type": "fill"
             }
           ],
-          "measurement": "raidTable",
+          "measurement": "diskio",
           "orderByTime": "ASC",
           "policy": "default",
-          "query": "SELECT -1*(last(\"raidFreeSize\") -11500000000000) AS \"SizeUsed\" FROM \"raidTable\" WHERE $timeFilter GROUP BY time($__interval) fill(previous)",
-          "rawQuery": false,
+          "queryType": "randomWalk",
           "refId": "A",
           "resultFormat": "time_series",
           "select": [
             [
               {
                 "params": [
-                  "raidTotalSize"
+                  "reads"
                 ],
                 "type": "field"
               },
@@ -1902,7 +2162,7 @@
               },
               {
                 "params": [
-                  "SizeTotal"
+                  "Read"
                 ],
                 "type": "alias"
               }
@@ -1910,7 +2170,7 @@
             [
               {
                 "params": [
-                  "raidFreeSize"
+                  "writes"
                 ],
                 "type": "field"
               },
@@ -1920,31 +2180,7 @@
               },
               {
                 "params": [
-                  "SizeFree"
-                ],
-                "type": "alias"
-              }
-            ],
-            [
-              {
-                "params": [
-                  "raidFreeSize"
-                ],
-                "type": "field"
-              },
-              {
-                "params": [],
-                "type": "last"
-              },
-              {
-                "params": [
-                  "-11500000000000"
-                ],
-                "type": "math"
-              },
-              {
-                "params": [
-                  "SizeUsed"
+                  "Write"
                 ],
                 "type": "alias"
               }
@@ -1957,7 +2193,7 @@
       "timeFrom": null,
       "timeRegions": [],
       "timeShift": null,
-      "title": "Used Capacity",
+      "title": "Swap",
       "tooltip": {
         "shared": true,
         "sort": 0,
@@ -1973,15 +2209,17 @@
       },
       "yaxes": [
         {
+          "$$hashKey": "object:1200",
           "format": "decbytes",
           "label": null,
           "logBase": 1,
-          "max": "10000000000000",
+          "max": null,
           "min": "0",
           "show": true
         },
         {
-          "format": "short",
+          "$$hashKey": "object:1201",
+          "format": "decbytes",
           "label": null,
           "logBase": 1,
           "max": null,
@@ -1999,7 +2237,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "influxdb",
+      "datasource": "${DS_INFLUXDB}",
       "fieldConfig": {
         "defaults": {
           "custom": {}
@@ -2009,13 +2247,208 @@
       "fill": 1,
       "fillGradient": 0,
       "gridPos": {
-        "h": 8,
-        "w": 12,
-        "x": 0,
-        "y": 11
+        "h": 6,
+        "w": 13,
+        "x": 11,
+        "y": 15
       },
       "hiddenSeries": false,
-      "id": 2,
+      "id": 33,
+      "legend": {
+        "alignAsTable": true,
+        "avg": false,
+        "current": true,
+        "max": true,
+        "min": true,
+        "rightSide": true,
+        "show": true,
+        "total": false,
+        "values": true
+      },
+      "lines": true,
+      "linewidth": 1,
+      "links": [],
+      "nullPointMode": "null",
+      "options": {
+        "alertThreshold": true
+      },
+      "percentage": false,
+      "pluginVersion": "7.3.5",
+      "pointradius": 5,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "alias": "Network:$col",
+          "bucketAggs": [
+            {
+              "field": "@timestamp",
+              "id": "2",
+              "settings": {
+                "interval": "auto",
+                "min_doc_count": 0,
+                "trimEdges": 0
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "dsType": "influxdb",
+          "groupBy": [
+            {
+              "params": [
+                "10s"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "null"
+              ],
+              "type": "fill"
+            }
+          ],
+          "measurement": "ifTable",
+          "metrics": [
+            {
+              "field": "select field",
+              "id": "1",
+              "type": "count"
+            }
+          ],
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "A",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "ifInOctets"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "last"
+              },
+              {
+                "params": [
+                  "10s"
+                ],
+                "type": "non_negative_derivative"
+              },
+              {
+                "params": [
+                  "in"
+                ],
+                "type": "alias"
+              }
+            ],
+            [
+              {
+                "params": [
+                  "ifOutOctets"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "last"
+              },
+              {
+                "params": [
+                  "10s"
+                ],
+                "type": "non_negative_derivative"
+              },
+              {
+                "params": [
+                  "out"
+                ],
+                "type": "alias"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "agent_host",
+              "operator": "=",
+              "value": "172.17.0.1"
+            }
+          ],
+          "timeField": "@timestamp"
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "Traffic",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "$$hashKey": "object:2169",
+          "format": "bps",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        },
+        {
+          "$$hashKey": "object:2170",
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": false
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": "${DS_INFLUXDB}",
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "custom": {}
+        },
+        "overrides": []
+      },
+      "fill": 1,
+      "fillGradient": 0,
+      "gridPos": {
+        "h": 12,
+        "w": 11,
+        "x": 0,
+        "y": 18
+      },
+      "hiddenSeries": false,
+      "id": 35,
       "legend": {
         "alignAsTable": true,
         "avg": false,
@@ -2023,7 +2456,180 @@
         "max": true,
         "min": true,
         "rightSide": false,
-        "show": false,
+        "show": true,
+        "total": false,
+        "values": true
+      },
+      "lines": true,
+      "linewidth": 1,
+      "nullPointMode": "null",
+      "options": {
+        "alertThreshold": true
+      },
+      "percentage": false,
+      "pluginVersion": "7.3.5",
+      "pointradius": 2,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "groupBy": [
+            {
+              "params": [
+                "10s"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "none"
+              ],
+              "type": "fill"
+            }
+          ],
+          "measurement": "cpu",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "queryType": "randomWalk",
+          "refId": "A",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "usage_system"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "last"
+              },
+              {
+                "params": [
+                  "System"
+                ],
+                "type": "alias"
+              }
+            ],
+            [
+              {
+                "params": [
+                  "usage_user"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "last"
+              },
+              {
+                "params": [
+                  "User"
+                ],
+                "type": "alias"
+              }
+            ],
+            [
+              {
+                "params": [
+                  "usage_iowait"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "last"
+              },
+              {
+                "params": [
+                  "I/O"
+                ],
+                "type": "alias"
+              }
+            ]
+          ],
+          "tags": []
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "CPU Load",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "$$hashKey": "object:1029",
+          "decimals": null,
+          "format": "percent",
+          "label": null,
+          "logBase": 1,
+          "max": "100",
+          "min": null,
+          "show": true
+        },
+        {
+          "$$hashKey": "object:1030",
+          "format": "percent",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": "${DS_INFLUXDB}",
+      "fieldConfig": {
+        "defaults": {
+          "custom": {}
+        },
+        "overrides": []
+      },
+      "fill": 1,
+      "fillGradient": 0,
+      "gridPos": {
+        "h": 9,
+        "w": 13,
+        "x": 11,
+        "y": 21
+      },
+      "hiddenSeries": false,
+      "id": 31,
+      "legend": {
+        "alignAsTable": true,
+        "avg": false,
+        "current": true,
+        "max": true,
+        "min": true,
+        "rightSide": false,
+        "show": true,
         "total": false,
         "values": true
       },
@@ -2032,23 +2638,14 @@
       "links": [],
       "nullPointMode": "connected",
       "options": {
-        "dataLinks": []
+        "alertThreshold": true
       },
       "percentage": false,
+      "pluginVersion": "7.3.5",
       "pointradius": 5,
       "points": false,
       "renderer": "flot",
-      "seriesOverrides": [
-        {
-          "alias": "Temperature",
-          "fill": 0,
-          "linewidth": 2,
-          "yaxis": 2
-        },
-        {
-          "alias": "Load-1"
-        }
-      ],
+      "seriesOverrides": [],
       "spaceLength": 10,
       "stack": false,
       "steppedLine": false,
@@ -2068,7 +2665,7 @@
           "groupBy": [
             {
               "params": [
-                "$__interval"
+                "10s"
               ],
               "type": "time"
             },
@@ -2077,6 +2674,12 @@
                 "laNames"
               ],
               "type": "tag"
+            },
+            {
+              "params": [
+                "none"
+              ],
+              "type": "fill"
             }
           ],
           "measurement": "laTable",
@@ -2101,80 +2704,25 @@
               {
                 "params": [],
                 "type": "mean"
-              },
-              {
-                "params": [
-                  "5"
-                ],
-                "type": "moving_average"
               }
             ]
           ],
           "tags": [
             {
-              "key": "laNames",
-              "operator": "=",
-              "value": "Load-5"
+              "key": "agent_host",
+              "operator": "=~",
+              "value": "/^$host$/"
             }
           ],
           "target": "",
           "timeField": "@timestamp"
-        },
-        {
-          "alias": "Temperature",
-          "groupBy": [
-            {
-              "params": [
-                "$__interval"
-              ],
-              "type": "time"
-            },
-            {
-              "params": [
-                "null"
-              ],
-              "type": "fill"
-            }
-          ],
-          "measurement": "snmp.SYNO",
-          "orderByTime": "ASC",
-          "policy": "default",
-          "refId": "B",
-          "resultFormat": "time_series",
-          "select": [
-            [
-              {
-                "params": [
-                  "temperature"
-                ],
-                "type": "field"
-              },
-              {
-                "params": [],
-                "type": "mean"
-              },
-              {
-                "params": [
-                  "5"
-                ],
-                "type": "moving_average"
-              },
-              {
-                "params": [
-                  "Temperature"
-                ],
-                "type": "alias"
-              }
-            ]
-          ],
-          "tags": []
         }
       ],
       "thresholds": [],
       "timeFrom": null,
       "timeRegions": [],
       "timeShift": null,
-      "title": "Load Vs. Temperature",
+      "title": "Load",
       "tooltip": {
         "shared": true,
         "sort": 0,
@@ -2190,6 +2738,7 @@
       },
       "yaxes": [
         {
+          "$$hashKey": "object:1568",
           "format": "short",
           "label": null,
           "logBase": 1,
@@ -2198,12 +2747,13 @@
           "show": true
         },
         {
-          "format": "celsius",
+          "$$hashKey": "object:1569",
+          "format": "short",
           "label": null,
           "logBase": 1,
-          "max": "50",
-          "min": "25",
-          "show": true
+          "max": null,
+          "min": null,
+          "show": false
         }
       ],
       "yaxis": {
@@ -2212,11 +2762,272 @@
       }
     },
     {
+      "datasource": "${DS_INFLUXDB}",
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "align": "left",
+            "displayMode": "auto",
+            "filterable": false
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "dark-purple",
+                "value": null
+              },
+              {
+                "color": "dark-red",
+                "value": 2
+              },
+              {
+                "color": "dark-orange",
+                "value": 3
+              },
+              {
+                "color": "dark-yellow",
+                "value": 4
+              },
+              {
+                "color": "rgb(150, 150, 150)",
+                "value": 5
+              },
+              {
+                "color": "rgb(51, 51, 51)",
+                "value": 6
+              },
+              {
+                "color": "rgb(5, 5, 5)",
+                "value": 7
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "severity_code"
+            },
+            "properties": [
+              {
+                "id": "mappings",
+                "value": [
+                  {
+                    "from": "",
+                    "id": 0,
+                    "text": "Debug",
+                    "to": "",
+                    "type": 1,
+                    "value": "7"
+                  },
+                  {
+                    "from": "",
+                    "id": 1,
+                    "text": "Info",
+                    "to": "",
+                    "type": 1,
+                    "value": "6"
+                  },
+                  {
+                    "from": "",
+                    "id": 2,
+                    "text": "Notice",
+                    "to": "",
+                    "type": 1,
+                    "value": "5"
+                  },
+                  {
+                    "from": "",
+                    "id": 3,
+                    "text": "Warning",
+                    "to": "",
+                    "type": 1,
+                    "value": "4"
+                  },
+                  {
+                    "from": "",
+                    "id": 4,
+                    "text": "Error",
+                    "to": "",
+                    "type": 1,
+                    "value": "3"
+                  },
+                  {
+                    "from": "",
+                    "id": 5,
+                    "text": "Critical",
+                    "to": "",
+                    "type": 1,
+                    "value": "2"
+                  },
+                  {
+                    "from": "",
+                    "id": 6,
+                    "text": "Alert",
+                    "to": "",
+                    "type": 1,
+                    "value": "1"
+                  },
+                  {
+                    "from": "",
+                    "id": 7,
+                    "text": "Emergency",
+                    "to": "",
+                    "type": 1,
+                    "value": "0"
+                  }
+                ]
+              },
+              {
+                "id": "custom.displayMode",
+                "value": "color-background"
+              },
+              {
+                "id": "custom.width",
+                "value": 119
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Time"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 163
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "hostname"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 194
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "appname"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 264
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 6,
+        "w": 12,
+        "x": 0,
+        "y": 30
+      },
+      "id": 43,
+      "options": {
+        "showHeader": true,
+        "sortBy": [
+          {
+            "desc": true,
+            "displayName": "Time"
+          }
+        ]
+      },
+      "pluginVersion": "7.3.5",
+      "targets": [
+        {
+          "groupBy": [
+            {
+              "params": [
+                "hostname"
+              ],
+              "type": "tag"
+            },
+            {
+              "params": [
+                "appname"
+              ],
+              "type": "tag"
+            }
+          ],
+          "measurement": "syslog",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "A",
+          "resultFormat": "table",
+          "select": [
+            [
+              {
+                "params": [
+                  "severity_code"
+                ],
+                "type": "field"
+              }
+            ],
+            [
+              {
+                "params": [
+                  "message"
+                ],
+                "type": "field"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "hostname",
+              "operator": "=~",
+              "value": "/^$logHost$/"
+            },
+            {
+              "condition": "AND",
+              "key": "appname",
+              "operator": "=~",
+              "value": "/^$appname$/"
+            },
+            {
+              "condition": "AND",
+              "key": "severity",
+              "operator": "=~",
+              "value": "/^$severity$/"
+            },
+            {
+              "condition": "AND",
+              "key": "message",
+              "operator": "=~",
+              "value": "/$Query/"
+            }
+          ]
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "Syslog Messages",
+      "type": "table"
+    },
+    {
       "aliasColors": {},
-      "bars": false,
+      "bars": true,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "influxdb",
+      "datasource": "${DS_INFLUXDB}",
+      "decimals": 0,
       "fieldConfig": {
         "defaults": {
           "custom": {}
@@ -2226,308 +3037,74 @@
       "fill": 1,
       "fillGradient": 0,
       "gridPos": {
-        "h": 8,
+        "h": 6,
         "w": 12,
         "x": 12,
-        "y": 11
+        "y": 30
       },
       "hiddenSeries": false,
-      "id": 24,
+      "id": 45,
+      "interval": "",
       "legend": {
         "alignAsTable": true,
-        "avg": false,
-        "current": true,
+        "avg": true,
+        "current": false,
         "max": true,
-        "min": true,
-        "rightSide": false,
-        "show": false,
-        "total": false,
+        "min": false,
+        "rightSide": true,
+        "show": true,
+        "sort": null,
+        "sortDesc": null,
+        "total": true,
         "values": true
       },
-      "lines": true,
-      "linewidth": 2,
-      "links": [],
-      "nullPointMode": "null",
-      "options": {
-        "dataLinks": []
-      },
-      "percentage": false,
-      "pointradius": 5,
-      "points": false,
-      "renderer": "flot",
-      "seriesOverrides": [
-        {
-          "alias": "ifTable.Max",
-          "fill": 0
-        },
-        {
-          "alias": "ifTable.Up",
-          "yaxis": 1
-        }
-      ],
-      "spaceLength": 10,
-      "stack": true,
-      "steppedLine": false,
-      "targets": [
-        {
-          "alias": "",
-          "groupBy": [
-            {
-              "params": [
-                "$__interval"
-              ],
-              "type": "time"
-            }
-          ],
-          "measurement": "ifTable",
-          "orderByTime": "ASC",
-          "policy": "default",
-          "query": "SELECT mean(\"value\") FROM \"ifTable\" WHERE (\"agent_host\" = '192.168.1.5') AND $timeFilter GROUP BY time($__interval) fill(null)",
-          "rawQuery": false,
-          "refId": "C",
-          "resultFormat": "time_series",
-          "select": [
-            [
-              {
-                "params": [
-                  "in"
-                ],
-                "type": "field"
-              },
-              {
-                "params": [],
-                "type": "mean"
-              },
-              {
-                "params": [
-                  "1s"
-                ],
-                "type": "non_negative_derivative"
-              },
-              {
-                "params": [
-                  "5"
-                ],
-                "type": "moving_average"
-              },
-              {
-                "params": [
-                  "*8"
-                ],
-                "type": "math"
-              },
-              {
-                "params": [
-                  "Down"
-                ],
-                "type": "alias"
-              }
-            ],
-            [
-              {
-                "params": [
-                  "out"
-                ],
-                "type": "field"
-              },
-              {
-                "params": [],
-                "type": "mean"
-              },
-              {
-                "params": [
-                  "1s"
-                ],
-                "type": "non_negative_derivative"
-              },
-              {
-                "params": [
-                  "5"
-                ],
-                "type": "moving_average"
-              },
-              {
-                "params": [
-                  "*8"
-                ],
-                "type": "math"
-              },
-              {
-                "params": [
-                  "Up"
-                ],
-                "type": "alias"
-              }
-            ]
-          ],
-          "tags": [
-            {
-              "key": "ifIndex",
-              "operator": "=",
-              "value": "3"
-            }
-          ]
-        },
-        {
-          "alias": "",
-          "groupBy": [
-            {
-              "params": [
-                "$__interval"
-              ],
-              "type": "time"
-            },
-            {
-              "params": [
-                "previous"
-              ],
-              "type": "fill"
-            }
-          ],
-          "hide": true,
-          "measurement": "ifTable",
-          "orderByTime": "ASC",
-          "policy": "default",
-          "query": "SELECT mean(\"value\") FROM \"ifTable\" WHERE (\"agent_host\" = '192.168.1.5') AND $timeFilter GROUP BY time($__interval) fill(null)",
-          "rawQuery": false,
-          "refId": "A",
-          "resultFormat": "time_series",
-          "select": [
-            [
-              {
-                "params": [
-                  "ifSpeed"
-                ],
-                "type": "field"
-              },
-              {
-                "params": [],
-                "type": "last"
-              },
-              {
-                "params": [
-                  "Max"
-                ],
-                "type": "alias"
-              }
-            ]
-          ],
-          "tags": [
-            {
-              "key": "ifDescr",
-              "operator": "=",
-              "value": "eth0"
-            }
-          ]
-        }
-      ],
-      "thresholds": [],
-      "timeFrom": null,
-      "timeRegions": [],
-      "timeShift": null,
-      "title": "LAN Traffic",
-      "tooltip": {
-        "shared": true,
-        "sort": 0,
-        "value_type": "individual"
-      },
-      "type": "graph",
-      "xaxis": {
-        "buckets": null,
-        "mode": "time",
-        "name": null,
-        "show": true,
-        "values": []
-      },
-      "yaxes": [
-        {
-          "decimals": 1,
-          "format": "bps",
-          "label": "Traffic",
-          "logBase": 10,
-          "max": "1100000000",
-          "min": null,
-          "show": true
-        },
-        {
-          "format": "bps",
-          "label": null,
-          "logBase": 10,
-          "max": "1100000000",
-          "min": null,
-          "show": true
-        }
-      ],
-      "yaxis": {
-        "align": false,
-        "alignLevel": null
-      }
-    },
-    {
-      "aliasColors": {},
-      "bars": false,
-      "dashLength": 10,
-      "dashes": false,
-      "datasource": null,
-      "fieldConfig": {
-        "defaults": {
-          "custom": {}
-        },
-        "overrides": []
-      },
-      "fill": 0,
-      "fillGradient": 0,
-      "gridPos": {
-        "h": 8,
-        "w": 24,
-        "x": 0,
-        "y": 19
-      },
-      "hiddenSeries": false,
-      "id": 18,
-      "legend": {
-        "avg": false,
-        "current": false,
-        "max": false,
-        "min": false,
-        "show": true,
-        "total": false,
-        "values": false
-      },
-      "lines": true,
+      "lines": false,
       "linewidth": 1,
       "links": [],
-      "nullPointMode": "null",
+      "nullPointMode": "connected",
       "options": {
-        "dataLinks": []
+        "alertThreshold": true
       },
       "percentage": false,
-      "pointradius": 5,
+      "pluginVersion": "7.3.5",
+      "pointradius": 2,
       "points": false,
       "renderer": "flot",
       "seriesOverrides": [
         {
-          "alias": "System Temperature",
-          "color": "#e5ac0e",
-          "fill": 0,
-          "linewidth": 2,
-          "yaxis": 2
+          "alias": "Info",
+          "color": "rgb(80, 80, 80)",
+          "stack": "A"
         },
         {
-          "alias": "Disk 1",
-          "color": "#5195ce"
+          "alias": "Notice",
+          "color": "rgb(182, 182, 182)",
+          "stack": "A"
         },
         {
-          "alias": "Disk 2",
-          "color": "#1f78c1"
+          "alias": "Warning",
+          "color": "#E0B400",
+          "stack": "A"
         },
         {
-          "alias": "Disk 3",
-          "color": "#0a437c"
+          "alias": "Error",
+          "color": "#FF780A",
+          "stack": "A"
         },
         {
-          "alias": "Disk 4",
-          "color": "#badff4"
+          "alias": "Critical",
+          "color": "#E02F44",
+          "stack": "A"
+        },
+        {
+          "alias": "Alert",
+          "color": "#8F3BB8",
+          "stack": "A"
+        },
+        {
+          "alias": "Emergency",
+          "color": "#8F3BB8",
+          "stack": "A"
         }
       ],
       "spaceLength": 10,
@@ -2535,11 +3112,11 @@
       "steppedLine": false,
       "targets": [
         {
-          "alias": "Disk 2",
+          "alias": "Info",
           "groupBy": [
             {
               "params": [
-                "$__interval"
+                "1m"
               ],
               "type": "time"
             },
@@ -2550,7 +3127,74 @@
               "type": "fill"
             }
           ],
-          "measurement": "diskTable",
+          "measurement": "syslog",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "A",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "severity_code"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "count"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "severity",
+              "operator": "=",
+              "value": "info"
+            },
+            {
+              "condition": "AND",
+              "key": "hostname",
+              "operator": "=~",
+              "value": "/^$logHost$/"
+            },
+            {
+              "condition": "AND",
+              "key": "severity",
+              "operator": "=~",
+              "value": "/^$severity$/"
+            },
+            {
+              "condition": "AND",
+              "key": "appname",
+              "operator": "=~",
+              "value": "/^$appname$/"
+            },
+            {
+              "condition": "AND",
+              "key": "message",
+              "operator": "=~",
+              "value": "/$Query/"
+            }
+          ]
+        },
+        {
+          "alias": "Notice",
+          "groupBy": [
+            {
+              "params": [
+                "1m"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "null"
+              ],
+              "type": "fill"
+            }
+          ],
+          "measurement": "syslog",
           "orderByTime": "ASC",
           "policy": "default",
           "refId": "B",
@@ -2559,36 +3203,54 @@
             [
               {
                 "params": [
-                  "diskTemperature"
+                  "severity_code"
                 ],
                 "type": "field"
               },
               {
                 "params": [],
-                "type": "mean"
-              },
-              {
-                "params": [
-                  10
-                ],
-                "type": "moving_average"
+                "type": "count"
               }
             ]
           ],
           "tags": [
             {
-              "key": "diskID",
+              "key": "severity",
               "operator": "=",
-              "value": "Disk 2"
+              "value": "notice"
+            },
+            {
+              "condition": "AND",
+              "key": "hostname",
+              "operator": "=~",
+              "value": "/^$logHost$/"
+            },
+            {
+              "condition": "AND",
+              "key": "severity",
+              "operator": "=~",
+              "value": "/^$severity$/"
+            },
+            {
+              "condition": "AND",
+              "key": "appname",
+              "operator": "=~",
+              "value": "/^$appname$/"
+            },
+            {
+              "condition": "AND",
+              "key": "message",
+              "operator": "=~",
+              "value": "/$Query/"
             }
           ]
         },
         {
-          "alias": "Disk 4",
+          "alias": "Warning",
           "groupBy": [
             {
               "params": [
-                "$__interval"
+                "1m"
               ],
               "type": "time"
             },
@@ -2599,7 +3261,7 @@
               "type": "fill"
             }
           ],
-          "measurement": "diskTable",
+          "measurement": "syslog",
           "orderByTime": "ASC",
           "policy": "default",
           "refId": "D",
@@ -2608,36 +3270,54 @@
             [
               {
                 "params": [
-                  "diskTemperature"
+                  "severity_code"
                 ],
                 "type": "field"
               },
               {
                 "params": [],
-                "type": "mean"
-              },
-              {
-                "params": [
-                  10
-                ],
-                "type": "moving_average"
+                "type": "count"
               }
             ]
           ],
           "tags": [
             {
-              "key": "diskID",
+              "key": "severity",
               "operator": "=",
-              "value": "Disk 4"
+              "value": "warning"
+            },
+            {
+              "condition": "AND",
+              "key": "hostname",
+              "operator": "=~",
+              "value": "/^$logHost$/"
+            },
+            {
+              "condition": "AND",
+              "key": "severity",
+              "operator": "=~",
+              "value": "/^$severity$/"
+            },
+            {
+              "condition": "AND",
+              "key": "appname",
+              "operator": "=~",
+              "value": "/^$appname$/"
+            },
+            {
+              "condition": "AND",
+              "key": "message",
+              "operator": "=~",
+              "value": "/$Query/"
             }
           ]
         },
         {
-          "alias": "System Temperature",
+          "alias": "Error",
           "groupBy": [
             {
               "params": [
-                "$__interval"
+                "1m"
               ],
               "type": "time"
             },
@@ -2648,7 +3328,74 @@
               "type": "fill"
             }
           ],
-          "measurement": "snmp.SYNO",
+          "measurement": "syslog",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "C",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "severity_code"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "count"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "severity",
+              "operator": "=",
+              "value": "err"
+            },
+            {
+              "condition": "AND",
+              "key": "hostname",
+              "operator": "=~",
+              "value": "/^$logHost$/"
+            },
+            {
+              "condition": "AND",
+              "key": "severity",
+              "operator": "=~",
+              "value": "/^$severity$/"
+            },
+            {
+              "condition": "AND",
+              "key": "appname",
+              "operator": "=~",
+              "value": "/^$appname$/"
+            },
+            {
+              "condition": "AND",
+              "key": "message",
+              "operator": "=~",
+              "value": "/$Query/"
+            }
+          ]
+        },
+        {
+          "alias": "Critical",
+          "groupBy": [
+            {
+              "params": [
+                "1m"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "null"
+              ],
+              "type": "fill"
+            }
+          ],
+          "measurement": "syslog",
           "orderByTime": "ASC",
           "policy": "default",
           "refId": "E",
@@ -2657,30 +3404,188 @@
             [
               {
                 "params": [
-                  "temperature"
+                  "severity_code"
                 ],
                 "type": "field"
               },
               {
                 "params": [],
-                "type": "mean"
-              },
-              {
-                "params": [
-                  10
-                ],
-                "type": "moving_average"
+                "type": "count"
               }
             ]
           ],
-          "tags": []
+          "tags": [
+            {
+              "key": "severity",
+              "operator": "=",
+              "value": "crit"
+            },
+            {
+              "condition": "AND",
+              "key": "hostname",
+              "operator": "=~",
+              "value": "/^$logHost$/"
+            },
+            {
+              "condition": "AND",
+              "key": "severity",
+              "operator": "=~",
+              "value": "/^$severity$/"
+            },
+            {
+              "condition": "AND",
+              "key": "appname",
+              "operator": "=~",
+              "value": "/^$appname$/"
+            },
+            {
+              "condition": "AND",
+              "key": "message",
+              "operator": "=~",
+              "value": "/$Query/"
+            }
+          ]
+        },
+        {
+          "alias": "Alert",
+          "groupBy": [
+            {
+              "params": [
+                "1m"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "null"
+              ],
+              "type": "fill"
+            }
+          ],
+          "measurement": "syslog",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "F",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "severity_code"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "count"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "severity",
+              "operator": "=",
+              "value": "alert"
+            },
+            {
+              "condition": "AND",
+              "key": "hostname",
+              "operator": "=~",
+              "value": "/^$logHost$/"
+            },
+            {
+              "condition": "AND",
+              "key": "severity",
+              "operator": "=~",
+              "value": "/^$severity$/"
+            },
+            {
+              "condition": "AND",
+              "key": "appname",
+              "operator": "=~",
+              "value": "/^$appname$/"
+            },
+            {
+              "condition": "AND",
+              "key": "message",
+              "operator": "=~",
+              "value": "/$Query/"
+            }
+          ]
+        },
+        {
+          "alias": "Emergency",
+          "groupBy": [
+            {
+              "params": [
+                "1m"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "null"
+              ],
+              "type": "fill"
+            }
+          ],
+          "measurement": "syslog",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "G",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "severity_code"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "count"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "severity",
+              "operator": "=",
+              "value": "emerg"
+            },
+            {
+              "condition": "AND",
+              "key": "hostname",
+              "operator": "=~",
+              "value": "/^$logHost$/"
+            },
+            {
+              "condition": "AND",
+              "key": "severity",
+              "operator": "=~",
+              "value": "/^$severity$/"
+            },
+            {
+              "condition": "AND",
+              "key": "appname",
+              "operator": "=~",
+              "value": "/^$appname$/"
+            },
+            {
+              "condition": "AND",
+              "key": "message",
+              "operator": "=~",
+              "value": "/$Query/"
+            }
+          ]
         }
       ],
       "thresholds": [],
       "timeFrom": null,
       "timeRegions": [],
       "timeShift": null,
-      "title": "Disk and System Temperatures",
+      "title": "syslog count",
       "tooltip": {
         "shared": true,
         "sort": 0,
@@ -2696,31 +3601,31 @@
       },
       "yaxes": [
         {
-          "decimals": null,
-          "format": "celsius",
-          "label": null,
+          "decimals": 0,
+          "format": "none",
+          "label": "Messages / min",
           "logBase": 1,
-          "max": "100",
-          "min": "25",
+          "max": null,
+          "min": null,
           "show": true
         },
         {
-          "format": "celsius",
+          "format": "short",
           "label": null,
           "logBase": 1,
-          "max": "60",
-          "min": "25",
-          "show": true
+          "max": null,
+          "min": null,
+          "show": false
         }
       ],
       "yaxis": {
         "align": false,
-        "alignLevel": 40
+        "alignLevel": null
       }
     }
   ],
   "refresh": false,
-  "schemaVersion": 25,
+  "schemaVersion": 26,
   "style": "dark",
   "tags": [],
   "templating": {
@@ -2728,16 +3633,18 @@
       {
         "current": {
           "selected": false,
-          "text": "influxdb",
-          "value": "influxdb"
+          "text": "InfluxDB",
+          "value": "InfluxDB"
         },
+        "error": null,
         "hide": 0,
         "includeAll": false,
         "label": null,
         "multi": false,
-        "name": "influxdb",
+        "name": "InfluxDB",
         "options": [],
         "query": "influxdb",
+        "queryValue": "",
         "refresh": 1,
         "regex": "",
         "skipUrlSync": false,
@@ -2745,13 +3652,10 @@
       },
       {
         "allValue": null,
-        "current": {
-          "selected": false,
-          "text": "All",
-          "value": "$__all"
-        },
-        "datasource": "influxdb",
+        "current": {},
+        "datasource": "${DS_INFLUXDB}",
         "definition": "",
+        "error": null,
         "hide": 0,
         "includeAll": true,
         "label": "Syno:",
@@ -2771,13 +3675,10 @@
       },
       {
         "allValue": null,
-        "current": {
-          "selected": false,
-          "text": "All",
-          "value": "$__all"
-        },
-        "datasource": "influxdb",
+        "current": {},
+        "datasource": "${DS_INFLUXDB}",
         "definition": "",
+        "error": null,
         "hide": 0,
         "includeAll": true,
         "label": "Interface:",
@@ -2794,11 +3695,91 @@
         "tagsQuery": "",
         "type": "query",
         "useTags": false
+      },
+      {
+        "allValue": null,
+        "current": {},
+        "datasource": "${DS_INFLUXDB}",
+        "definition": "",
+        "error": null,
+        "hide": 0,
+        "includeAll": true,
+        "label": "Appname",
+        "multi": true,
+        "name": "appname",
+        "options": [],
+        "query": "SHOW TAG VALUES FROM syslog WITH KEY=appname",
+        "refresh": 2,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 1,
+        "tagValuesQuery": "",
+        "tags": [],
+        "tagsQuery": "",
+        "type": "query",
+        "useTags": false
+      },
+      {
+        "allValue": null,
+        "current": {},
+        "datasource": "${DS_INFLUXDB}",
+        "definition": "",
+        "error": null,
+        "hide": 0,
+        "includeAll": true,
+        "label": "LogHostname",
+        "multi": true,
+        "name": "logHost",
+        "options": [],
+        "query": "SHOW TAG VALUES FROM syslog WITH KEY=hostname",
+        "refresh": 2,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 1,
+        "tagValuesQuery": "",
+        "tags": [],
+        "tagsQuery": "",
+        "type": "query",
+        "useTags": false
+      },
+      {
+        "allValue": null,
+        "current": {},
+        "datasource": "${DS_INFLUXDB}",
+        "definition": "",
+        "error": null,
+        "hide": 0,
+        "includeAll": true,
+        "label": "Severity",
+        "multi": true,
+        "name": "severity",
+        "options": [],
+        "query": "SHOW TAG VALUES FROM syslog WITH KEY=severity",
+        "refresh": 2,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "tagValuesQuery": "",
+        "tags": [],
+        "tagsQuery": "",
+        "type": "query",
+        "useTags": false
+      },
+      {
+        "current": {},
+        "error": null,
+        "hide": 0,
+        "label": "LogQuery",
+        "name": "Query",
+        "options": [],
+        "query": "",
+        "skipUrlSync": false,
+        "type": "textbox"
       }
     ]
   },
   "time": {
-    "from": "now-30d",
+    "from": "now-30m",
     "to": "now"
   },
   "timepicker": {
@@ -2827,6 +3808,6 @@
   },
   "timezone": "browser",
   "title": "Synology DashBoard",
-  "uid": "TIcL1_ezk",
-  "version": 15
+  "uid": "TIcL1_ezk22",
+  "version": 21
 }
