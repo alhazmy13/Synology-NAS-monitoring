@@ -21,7 +21,7 @@ The main points of this project are:
 2. Create two empty folders in your Synology ***influxdb*** and ***grafana***, we need to use it later to mount it to our container.
 3. Open Docker client from Synslogy > Image > Add > Add from url and paste Hub page url "https://hub.docker.com/r/alhazmy13/telegraf-influxdb-grafana"
 4. Wait until it finishes downloading the image
-5. Click on the image "alhazmy13/telegraf-influxdb-grafana" and then click on Lunch 
+5. Click on the image "alhazmy13/telegraf-influxdb-grafana" and then click on Launch 
 6. Click on Advanced Settings and check "Enable auto-restart."
 7. From the Volume tab, click Add folder and select the first folder that we created, "grafana" and on mount Path, paste ***/var/lib/grafana***
 8. From the Volume tab again, click Add Folder and select the second folder that we created "influxdb" and on mount Path paste ***/var/lib/influxdb***
