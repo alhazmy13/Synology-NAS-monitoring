@@ -1,5 +1,7 @@
 # Synology NAS monitoring
 
+![alt text](https://github.com/alhazmy13/Synology-NAS-monitoring/blob/master/dashboard.png)
+
 The main points of this project are:
 
 * Persistence is supported via mounting volumes to a Docker container.
