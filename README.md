@@ -9,6 +9,12 @@ The main points of this project are:
 * Added snmp packages and Synology NAS MIBS.
 * Enable 
 
+## Enable SNMP
+1. From Control panel in your Synology NAS go to Terminal & SNMP
+2. Click on SNMP tab, and enable SNMPv1, SNMPv2 service
+3. in Community input put ***public***
+4. Save
+
 ## Run Docker image in your Synology
 
 1. Install Docker from Synology package center
