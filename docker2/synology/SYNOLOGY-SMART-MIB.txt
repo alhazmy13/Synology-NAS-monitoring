@@ -1,0 +1,141 @@
+SYNOLOGY-SMART-MIB DEFINITIONS ::= BEGIN
+
+IMPORTS
+	OBJECT-GROUP, MODULE-COMPLIANCE
+		FROM SNMPv2-CONF
+	OBJECT-TYPE, Integer32, enterprises, MODULE-IDENTITY
+		FROM SNMPv2-SMI;
+
+synologyDiskSMART MODULE-IDENTITY
+	LAST-UPDATED	"201605050000Z"
+	ORGANIZATION	"www.synology.com"
+	CONTACT-INFO
+		 "Synology Inc.
+		  Email: snmp@synology.com"
+	DESCRIPTION		"Characteristics of the disk SMART information"
+	REVISION		"201605050000Z"
+	DESCRIPTION		"First draft."
+	::= { synology 5 }
+
+synology	OBJECT IDENTIFIER
+	::= { enterprises 6574 }
+
+diskSMARTTable OBJECT-TYPE
+	SYNTAX		SEQUENCE OF DiskSMARTEntry
+	MAX-ACCESS	not-accessible
+	STATUS		current
+	DESCRIPTION	"Table of disk SMART data."
+	::= { synologyDiskSMART 1 }
+
+diskSMARTEntry OBJECT-TYPE
+	SYNTAX		DiskSMARTEntry
+	MAX-ACCESS	not-accessible
+	STATUS		current
+	DESCRIPTION "An entry containing a disk SMART information"
+	INDEX		{ diskSMARTInfoIndex }
+	::= { diskSMARTTable 1 }
+
+DiskSMARTEntry ::= SEQUENCE {
+	diskSMARTInfoIndex		Integer32,
+	diskSMARTInfoDevName	OCTET STRING,
+	diskSMARTAttrName		OCTET STRING,
+	diskSMARTAttrId			Integer32,
+	diskSMARTAttrCurrent	Integer32,
+	diskSMARTAttrWorst		Integer32,
+	diskSMARTAttrThreshold	Integer32,
+	diskSMARTAttrRaw		Integer32,
+	diskSMARTAttrStatus		OCTET STRING
+}
+
+diskSMARTInfoIndex OBJECT-TYPE
+	SYNTAX		Integer32(0..2147483647)
+	MAX-ACCESS  not-accessible
+	STATUS		current
+	DESCRIPTION	"SMART info index"
+	::= { diskSMARTEntry 1 }
+
+diskSMARTInfoDevName OBJECT-TYPE
+	SYNTAX		OCTET STRING
+	MAX-ACCESS	read-only
+	STATUS		current
+	DESCRIPTION "SMART info device name"
+	::= { diskSMARTEntry 2 }
+
+diskSMARTAttrName OBJECT-TYPE
+	SYNTAX		OCTET STRING
+	MAX-ACCESS	read-only
+	STATUS		current
+	DESCRIPTION "SMART attribute name"
+	::= { diskSMARTEntry 3 }
+
+diskSMARTAttrId OBJECT-TYPE
+	SYNTAX		Integer32
+	MAX-ACCESS	read-only
+	STATUS		current
+	DESCRIPTION	"SMART attribute ID"
+	::= { diskSMARTEntry 4 }
+
+diskSMARTAttrCurrent OBJECT-TYPE
+	SYNTAX		Integer32
+	MAX-ACCESS	read-only
+	STATUS		current
+	DESCRIPTION	"SMART attribute current value"
+	::= { diskSMARTEntry 5 }
+
+diskSMARTAttrWorst OBJECT-TYPE
+	SYNTAX		Integer32
+	MAX-ACCESS	read-only
+	STATUS		current
+	DESCRIPTION	"SMART attribute worst value"
+	::= { diskSMARTEntry 6 }
+
+diskSMARTAttrThreshold OBJECT-TYPE
+	SYNTAX		Integer32
+	MAX-ACCESS	read-only
+	STATUS		current
+	DESCRIPTION	"SMART attribute threshold value"
+	::= { diskSMARTEntry 7 }
+
+diskSMARTAttrRaw OBJECT-TYPE
+	SYNTAX		Integer32
+	MAX-ACCESS	read-only
+	STATUS		current
+	DESCRIPTION	"SMART attribute raw value"
+	::= { diskSMARTEntry 8 }
+
+diskSMARTAttrStatus OBJECT-TYPE
+	SYNTAX		OCTET STRING
+	MAX-ACCESS	read-only
+	STATUS		current
+	DESCRIPTION	"SMART attribute status"
+	::= { diskSMARTEntry 9 }
+
+synologyDiskSMARTConformance	OBJECT IDENTIFIER ::= { synologyDiskSMART 2 }
+synologyDiskSMARTCompliances	OBJECT IDENTIFIER ::= { synologyDiskSMARTConformance 1 }
+synologyDiskSMARTGroups			OBJECT IDENTIFIER ::= { synologyDiskSMARTConformance 2 }
+
+synologyDiskSMARTCompliance MODULE-COMPLIANCE
+	STATUS				current
+	DESCRIPTION
+						"The compliance statement for storage IO entities which
+						implement the SYNOLOGY SMART MIB."
+	MODULE				-- this module
+	MANDATORY-GROUPS	{ synologyDiskSMARTGroup }
+	::= { synologyDiskSMARTCompliances 1 }
+
+synologyDiskSMARTGroup OBJECT-GROUP
+	OBJECTS {	diskSMARTInfoDevName,
+				diskSMARTAttrName,
+				diskSMARTAttrId,
+				diskSMARTAttrCurrent,
+				diskSMARTAttrWorst,
+				diskSMARTAttrThreshold,
+				diskSMARTAttrRaw,
+				diskSMARTAttrStatus }
+	STATUS		current
+	DESCRIPTION
+				"A collection of objects providing basic information
+				of an synology disk SMART entity."
+	::= { synologyDiskSMARTGroups 1 }
+
+END

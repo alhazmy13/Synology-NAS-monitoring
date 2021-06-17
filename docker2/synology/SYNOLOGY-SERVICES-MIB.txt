@@ -1,0 +1,86 @@
+SYNOLOGY-SERVICES-MIB DEFINITIONS ::= BEGIN
+
+IMPORTS
+	OBJECT-GROUP, MODULE-COMPLIANCE
+		FROM SNMPv2-CONF
+	OBJECT-TYPE, Integer32, enterprises, MODULE-IDENTITY
+		FROM SNMPv2-SMI;
+
+synologyService MODULE-IDENTITY
+	LAST-UPDATED	"201605270000Z"
+	ORGANIZATION	"www.synology.com"
+	CONTACT-INFO
+		 "Synology Inc.
+		  Email: snmp@synology.com"
+	DESCRIPTION		"List number of users using each service in DS"
+	REVISION		"201605270000Z"
+	DESCRIPTION		"First draft."
+	::= { synology 6 }
+
+synology	OBJECT IDENTIFIER
+	::= { enterprises 6574 }
+
+serviceTable OBJECT-TYPE
+	SYNTAX		SEQUENCE OF ServiceEntry
+	MAX-ACCESS	not-accessible
+	STATUS		current
+	DESCRIPTION	"Table of Services data."
+	::= { synologyService 1 }
+
+serviceEntry OBJECT-TYPE
+	SYNTAX		ServiceEntry
+	MAX-ACCESS	not-accessible
+	STATUS		current
+	DESCRIPTION "An entry containing Service information"
+	INDEX		{ serviceInfoIndex }
+	::= { serviceTable 1 }
+
+ServiceEntry ::= SEQUENCE {
+	serviceInfoIndex	Integer32,
+	serviceName	OCTET STRING,
+	serviceUsers	Integer32
+}
+
+serviceInfoIndex OBJECT-TYPE
+	SYNTAX		Integer32(0..2147483647)
+	MAX-ACCESS	not-accessible
+	STATUS		current
+	DESCRIPTION	"Service info index"
+	::= { serviceEntry 1 }
+
+serviceName OBJECT-TYPE
+	SYNTAX		OCTET STRING
+	MAX-ACCESS	read-only
+	STATUS		current
+	DESCRIPTION	"Service name"
+	::= { serviceEntry 2 }
+
+serviceUsers OBJECT-TYPE
+	SYNTAX		Integer32
+	MAX-ACCESS	read-only
+	STATUS		current
+	DESCRIPTION "Number of users using this service"
+	::= { serviceEntry 3 }
+
+synologyServiceConformance	OBJECT IDENTIFIER ::= { synologyService 2 }
+synologyServiceCompliances	OBJECT IDENTIFIER ::= { synologyServiceConformance 1 }
+synologyServiceGroups			OBJECT IDENTIFIER ::= { synologyServiceConformance 2 }
+
+synologyServiceCompliance MODULE-COMPLIANCE
+	STATUS				current
+	DESCRIPTION
+						"The compliance statement for service information."
+	MODULE				-- this module
+	MANDATORY-GROUPS	{ synologyServiceGroup }
+	::= { synologyServiceCompliances 1 }
+
+synologyServiceGroup OBJECT-GROUP
+	OBJECTS {	serviceName,
+				serviceUsers }
+	STATUS		current
+	DESCRIPTION
+				"A collection of objects providing basic information
+				of an synology service entity."
+	::= { synologyServiceGroups 1 }
+
+END

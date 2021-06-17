@@ -1,0 +1,103 @@
+SYNOLOGY-GPUINFO-MIB DEFINITIONS ::= BEGIN
+
+IMPORTS
+	DisplayString
+		FROM SNMPv2-TC
+	OBJECT-GROUP, MODULE-COMPLIANCE
+		FROM SNMPv2-CONF
+	OBJECT-TYPE, Integer32, Counter64, enterprises, MODULE-IDENTITY
+		FROM SNMPv2-SMI;
+
+gpuInfo MODULE-IDENTITY
+	LAST-UPDATED "201812030000Z"
+	ORGANIZATION "www.synology.com"
+	CONTACT-INFO
+		"Synology Inc.
+		 Email: snmp@synology.com"
+	DESCRIPTION
+		"Characteristics of the gpu information"
+	REVISION	"201812030000Z"
+	DESCRIPTION
+		"First draft."
+	::= { synology 108 }
+
+synology	OBJECT IDENTIFIER
+	::= { enterprises 6574 }
+
+gpuInfoSupported OBJECT-TYPE
+	SYNTAX	  Integer32
+	MAX-ACCESS  read-only
+	STATUS	  current
+	DESCRIPTION
+	"Synology gpu Supported."
+	::= { gpuInfo 1 }
+
+gpuUtilization OBJECT-TYPE
+	SYNTAX	  Integer32
+	MAX-ACCESS  read-only
+	STATUS	  current
+	DESCRIPTION
+	"Synology gpu utilization %."
+	::= { gpuInfo 2 }
+
+gpuMemoryUtilization OBJECT-TYPE
+	SYNTAX	  Integer32
+	MAX-ACCESS  read-only
+	STATUS	  current
+	DESCRIPTION
+	"Synology gpu memory utilization %."
+	::= { gpuInfo 3 }
+
+gpuMemoryFree OBJECT-TYPE
+	SYNTAX	  Integer32
+	MAX-ACCESS  read-only
+	STATUS	  current
+	DESCRIPTION
+	"Synology gpu free memory in kB."
+	::= { gpuInfo 4 }
+
+gpuMemoryUsed OBJECT-TYPE
+	SYNTAX	  Integer32
+	MAX-ACCESS  read-only
+	STATUS	  current
+	DESCRIPTION
+	"Synology gpu used memory in kB."
+	::= { gpuInfo 5 }
+
+gpuMemoryTotal OBJECT-TYPE
+	SYNTAX	  Integer32
+	MAX-ACCESS  read-only
+	STATUS	  current
+	DESCRIPTION
+	"Synology gpu total memory in kB."
+	::= { gpuInfo 6 }
+
+gpuInfoConformance OBJECT IDENTIFIER ::= { gpuInfo 7 }
+gpuInfoCompliances OBJECT IDENTIFIER ::= { gpuInfoConformance 1 }
+gpuInfoGroups 			OBJECT IDENTIFIER ::= { gpuInfoConformance 2 }
+
+gpuInfoCompliance MODULE-COMPLIANCE
+	STATUS  current
+	DESCRIPTION
+			"The compliance statement for syno gpuInfo which
+			implement the SYNOLOGY GPUINFO MIB."
+	MODULE  -- this module
+		MANDATORY-GROUPS { gpuInfoGroup }
+
+	::= { gpuInfoCompliances 1 }
+
+gpuInfoGroup OBJECT-GROUP
+	OBJECTS {	gpuInfoSupported,
+				gpuUtilization,
+				gpuMemoryUtilization,
+				gpuMemoryFree,
+				gpuMemoryUsed,
+				gpuMemoryTotal }
+	STATUS  current
+	DESCRIPTION
+			"A collection of objects providing basic information
+			 of a synology gpu.
+			 If platform doesn't support gpu, it will get 0 for every oids."
+	::= { gpuInfoGroups 1 }
+
+END

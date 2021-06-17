@@ -1,0 +1,102 @@
+SYNOLOGY-PORT-MIB DEFINITIONS ::= BEGIN
+
+IMPORTS
+    OBJECT-GROUP, MODULE-COMPLIANCE
+        FROM SNMPv2-CONF
+    enterprises, MODULE-IDENTITY, OBJECT-TYPE, Gauge32, Integer32
+        FROM SNMPv2-SMI;
+
+synoEthPort MODULE-IDENTITY
+    LAST-UPDATED "202012200000Z"
+    ORGANIZATION "www.synology.com"
+    CONTACT-INFO
+        "Synology Inc.
+         Email: snmp@synology.com"
+    DESCRIPTION
+        "The MIB module describes Ethernet port status."
+    REVISION     "202012200000Z"
+    DESCRIPTION
+        "Initial version."
+    ::= { synology 109 }
+
+synology OBJECT IDENTIFIER ::= { enterprises 6574 }
+
+ethPortTable OBJECT-TYPE
+    SYNTAX      SEQUENCE OF EthPortEntry
+    MAX-ACCESS  not-accessible
+    STATUS      current
+    DESCRIPTION
+        "A list of Ethernet port entries."
+    ::= { synoEthPort 1 }
+
+ethPortEntry OBJECT-TYPE
+    SYNTAX      EthPortEntry
+    MAX-ACCESS  not-accessible
+    STATUS      current
+    DESCRIPTION
+        "An entry containing management information of an Ethernet port"
+    INDEX { ethPortIndex }
+    ::= { ethPortTable 1 }
+
+EthPortEntry ::= SEQUENCE {
+    ethPortIndex  Integer32,
+    ethPortStatus INTEGER,
+    ethPortSpeed  Gauge32
+}
+
+ethPortIndex OBJECT-TYPE
+    SYNTAX      Integer32 (1..2147483647)
+    MAX-ACCESS  not-accessible
+    STATUS      current
+    DESCRIPTION
+        "A unique value for each Ethernet port present on the device."
+    ::= { ethPortEntry 1 }
+
+ethPortStatus OBJECT-TYPE
+    SYNTAX      INTEGER {
+                    unknown(1),
+                    up(2),
+                    down(3)
+                }
+    MAX-ACCESS  read-only
+    STATUS	    current
+    DESCRIPTION
+        "The port status of the Ethernet port."
+    ::= { ethPortEntry 2 }
+
+ethPortSpeed OBJECT-TYPE
+    SYNTAX      Gauge32
+    MAX-ACCESS  read-only
+    STATUS	    current
+    DESCRIPTION
+        "An estimated of the Ethernet port link speed in units of
+        1,000,000 bits per second."
+    ::= { ethPortEntry 3 }
+
+--
+-- SNMP conformance statements
+--
+ethPortConformance OBJECT IDENTIFIER ::= { synoEthPort 2 }
+ethPortCompliances OBJECT IDENTIFIER ::= { ethPortConformance 1 }
+ethPortGroups      OBJECT IDENTIFIER ::= { ethPortConformance 2 }
+
+ethPortCompliance MODULE-COMPLIANCE
+    STATUS  current
+    DESCRIPTION
+        "The compliance statement for synoEthPort entities which
+        implement the SYNOLOGY PORT MIB."
+    MODULE
+        MANDATORY-GROUPS { ethPortGroup }
+    ::= { ethPortCompliances 1 }
+
+ethPortGroup OBJECT-GROUP
+    OBJECTS {
+        ethPortStatus,
+        ethPortSpeed
+    }
+    STATUS  current
+    DESCRIPTION
+        "The Ethernet port attribute group."
+    ::= { ethPortGroups 1 }
+
+END

@@ -1,0 +1,212 @@
+SYNOLOGY-ISCSILUN-MIB DEFINITIONS ::= BEGIN
+
+IMPORTS
+	OBJECT-GROUP, MODULE-COMPLIANCE
+		FROM SNMPv2-CONF
+	OBJECT-TYPE, Integer32, enterprises, MODULE-IDENTITY
+		FROM SNMPv2-SMI;
+
+synologyiSCSILUN MODULE-IDENTITY
+	LAST-UPDATED	"201605180000Z"
+	ORGANIZATION	"www.synology.com"
+	CONTACT-INFO
+		 "Synology Inc.
+		  Email: snmp@synology.com"
+	DESCRIPTION		"Characteristics of the iscsi lun information"
+	REVISION		"201605180000Z"
+	DESCRIPTION		"First draft."
+	::= { synology 104 }
+
+synology	OBJECT IDENTIFIER
+	::= { enterprises 6574 }
+
+iSCSILUNTable OBJECT-TYPE
+	SYNTAX		SEQUENCE OF ISCSILUNEntry
+	MAX-ACCESS	not-accessible
+	STATUS		current
+	DESCRIPTION	"Table of iSCSI LUN data."
+	::= { synologyiSCSILUN 1 }
+
+iSCSILUNEntry OBJECT-TYPE
+	SYNTAX		ISCSILUNEntry
+	MAX-ACCESS	not-accessible
+	STATUS		current
+	DESCRIPTION "An entry containing iscsi lun information"
+	INDEX		{ iSCSILUNInfoIndex }
+	::= { iSCSILUNTable 1 }
+
+ISCSILUNEntry ::= SEQUENCE {
+	iSCSILUNInfoIndex		Integer32,
+	iSCSILUNUUID	OCTET STRING,
+	iSCSILUNName	OCTET STRING,
+	iSCSILUNThroughputReadHigh	Integer32,
+	iSCSILUNThroughputReadLow	Integer32,
+	iSCSILUNThroughputWriteHigh	Integer32,
+	iSCSILUNThroughputWriteLow	Integer32,
+	iSCSILUNIopsRead	Integer32,
+	iSCSILUNIopsWrite	Integer32,
+	iSCSILUNDiskLatencyRead	Integer32,
+	iSCSILUNDiskLatencyWrite	Integer32,
+	iSCSILUNNetworkLatencyTx	Integer32,
+	iSCSILUNNetworkLatencyRx	Integer32,
+	iSCSILUNIoSizeRead	Integer32,
+	iSCSILUNIoSizeWrite	Integer32,
+	iSCSILUNQueueDepth	Integer32,
+	iSCSILUNType	OCTET STRING
+}
+
+iSCSILUNInfoIndex OBJECT-TYPE
+	SYNTAX		Integer32(0..2147483647)
+	MAX-ACCESS  not-accessible
+	STATUS		current
+	DESCRIPTION	"LUN info index"
+	::= { iSCSILUNEntry 1 }
+
+iSCSILUNUUID OBJECT-TYPE
+	SYNTAX		OCTET STRING
+	MAX-ACCESS	read-only
+	STATUS		current
+	DESCRIPTION "LUN uuid"
+	::= { iSCSILUNEntry 2 }
+
+iSCSILUNName OBJECT-TYPE
+	SYNTAX		OCTET STRING
+	MAX-ACCESS	read-only
+	STATUS		current
+	DESCRIPTION "LUN name"
+	::= { iSCSILUNEntry 3 }
+
+iSCSILUNThroughputReadHigh OBJECT-TYPE
+	SYNTAX		Integer32
+	MAX-ACCESS	read-only
+	STATUS		current
+	DESCRIPTION	"LUN read throughput over 32 bits part"
+	::= { iSCSILUNEntry 4 }
+
+iSCSILUNThroughputReadLow OBJECT-TYPE
+	SYNTAX		Integer32
+	MAX-ACCESS	read-only
+	STATUS		current
+	DESCRIPTION	"LUN read throughput in unsigned 32 bit"
+	::= { iSCSILUNEntry 5 }
+
+iSCSILUNThroughputWriteHigh OBJECT-TYPE
+	SYNTAX		Integer32
+	MAX-ACCESS	read-only
+	STATUS		current
+	DESCRIPTION	"LUN write throughput over 32 bits part"
+	::= { iSCSILUNEntry 6 }
+
+iSCSILUNThroughputWriteLow OBJECT-TYPE
+	SYNTAX		Integer32
+	MAX-ACCESS	read-only
+	STATUS		current
+	DESCRIPTION	"LUN write throughput in unsigned 32 bit"
+	::= { iSCSILUNEntry 7 }
+
+iSCSILUNIopsRead OBJECT-TYPE
+	SYNTAX		Integer32
+	MAX-ACCESS	read-only
+	STATUS		current
+	DESCRIPTION	"LUN read iops"
+	::= { iSCSILUNEntry 8 }
+
+iSCSILUNIopsWrite OBJECT-TYPE
+	SYNTAX		Integer32
+	MAX-ACCESS	read-only
+	STATUS		current
+	DESCRIPTION	"LUN write iops"
+	::= { iSCSILUNEntry 9 }
+
+iSCSILUNDiskLatencyRead OBJECT-TYPE
+	SYNTAX		Integer32
+	MAX-ACCESS	read-only
+	STATUS		current
+	DESCRIPTION	"LUN disk latency when reading"
+	::= { iSCSILUNEntry 10 }
+
+iSCSILUNDiskLatencyWrite OBJECT-TYPE
+	SYNTAX		Integer32
+	MAX-ACCESS	read-only
+	STATUS		current
+	DESCRIPTION	"LUN disk latency when writing"
+	::= { iSCSILUNEntry 11 }
+
+iSCSILUNNetworkLatencyTx OBJECT-TYPE
+	SYNTAX		Integer32
+	MAX-ACCESS	read-only
+	STATUS		current
+	DESCRIPTION	"LUN transfer data network latency"
+	::= { iSCSILUNEntry 12 }
+
+iSCSILUNNetworkLatencyRx OBJECT-TYPE
+	SYNTAX		Integer32
+	MAX-ACCESS	read-only
+	STATUS		current
+	DESCRIPTION	"LUN receive data network latency"
+	::= { iSCSILUNEntry 13 }
+
+iSCSILUNIoSizeRead OBJECT-TYPE
+	SYNTAX		Integer32
+	MAX-ACCESS	read-only
+	STATUS		current
+	DESCRIPTION	"LUN average io size when reading"
+	::= { iSCSILUNEntry 14 }
+
+iSCSILUNIoSizeWrite OBJECT-TYPE
+	SYNTAX		Integer32
+	MAX-ACCESS	read-only
+	STATUS		current
+	DESCRIPTION	"LUN average io size when writing"
+	::= { iSCSILUNEntry 15 }
+
+iSCSILUNQueueDepth OBJECT-TYPE
+	SYNTAX		Integer32
+	MAX-ACCESS	read-only
+	STATUS		current
+	DESCRIPTION	"Num of iSCSI commands in LUN queue"
+	::= { iSCSILUNEntry 16 }
+
+iSCSILUNType OBJECT-TYPE
+	SYNTAX		OCTET STRING
+	MAX-ACCESS	read-only
+	STATUS		current
+	DESCRIPTION "LUN type"
+	::= { iSCSILUNEntry 17 }
+
+synologyiSCSILUNConformance	OBJECT IDENTIFIER ::= { synologyiSCSILUN 2 }
+synologyiSCSILUNCompliances	OBJECT IDENTIFIER ::= { synologyiSCSILUNConformance 1 }
+synologyiSCSILUNGroups			OBJECT IDENTIFIER ::= { synologyiSCSILUNConformance 2 }
+
+synologyiSCSILUNCompliance MODULE-COMPLIANCE
+	STATUS				current
+	DESCRIPTION
+						"The compliance statement for iSCSI LUN information."
+	MODULE				-- this module
+	MANDATORY-GROUPS	{ synologyiSCSILUNGroup }
+	::= { synologyiSCSILUNCompliances 1 }
+
+synologyiSCSILUNGroup OBJECT-GROUP
+	OBJECTS {	iSCSILUNUUID,
+				iSCSILUNName,
+				iSCSILUNThroughputReadHigh,
+				iSCSILUNThroughputReadLow,
+				iSCSILUNThroughputWriteHigh,
+				iSCSILUNThroughputWriteLow,
+				iSCSILUNIopsRead,
+				iSCSILUNIopsWrite,
+				iSCSILUNDiskLatencyRead,
+				iSCSILUNDiskLatencyWrite,
+				iSCSILUNNetworkLatencyTx,
+				iSCSILUNNetworkLatencyRx,
+				iSCSILUNIoSizeRead,
+				iSCSILUNIoSizeWrite,
+				iSCSILUNQueueDepth,
+				iSCSILUNType }
+	STATUS		current
+	DESCRIPTION
+				"A collection of objects providing basic information
+				of an synology iSCSI LUN entity."
+	::= { synologyiSCSILUNGroups 1 }
+
+END

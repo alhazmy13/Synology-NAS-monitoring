@@ -1,0 +1,95 @@
+SYNOLOGY-EBOX-MIB DEFINITIONS ::= BEGIN
+
+IMPORTS
+	OBJECT-GROUP, MODULE-COMPLIANCE
+		FROM SNMPv2-CONF
+	OBJECT-TYPE, Integer32, enterprises, MODULE-IDENTITY
+		FROM SNMPv2-SMI;
+
+synologyEbox MODULE-IDENTITY
+	LAST-UPDATED	"201706260000Z"
+	ORGANIZATION	"www.synology.com"
+	CONTACT-INFO
+		 "Synology Inc.
+		  Email: snmp@synology.com"
+	DESCRIPTION		"List ebox info in DS"
+	REVISION		"201706260000Z"
+	DESCRIPTION		"First draft."
+	::= { synology 105 }
+
+synology OBJECT IDENTIFIER
+	::= { enterprises 6574 }
+
+eboxTable OBJECT-TYPE
+	SYNTAX		SEQUENCE OF EboxEntry
+	MAX-ACCESS	not-accessible
+	STATUS		current
+	DESCRIPTION	"Table of ebox data."
+	::= { synologyEbox 1 }
+
+eboxEntry OBJECT-TYPE
+	SYNTAX		EboxEntry
+	MAX-ACCESS	not-accessible
+	STATUS		current
+	DESCRIPTION "An entry containing ebox information"
+	INDEX		{ eboxIndex }
+	::= { eboxTable 1 }
+
+EboxEntry ::= SEQUENCE {
+	eboxIndex           Integer32,
+	eboxModel           OCTET STRING,
+	eboxPower	        Integer32,
+	eboxRedundantPower	Integer32
+}
+
+eboxIndex OBJECT-TYPE
+	SYNTAX		Integer32
+	MAX-ACCESS	read-only
+	STATUS		current
+	DESCRIPTION	"Ebox info index"
+	::= { eboxEntry 1 }
+
+eboxModel OBJECT-TYPE
+	SYNTAX		OCTET STRING
+	MAX-ACCESS	read-only
+	STATUS		current
+	DESCRIPTION	"Ebox model"
+	::= { eboxEntry 2 }
+
+eboxPower OBJECT-TYPE
+	SYNTAX		Integer32
+	MAX-ACCESS	read-only
+	STATUS		current
+	DESCRIPTION	"Ebox Power"
+	::= { eboxEntry 3 }
+
+eboxRedundantPower OBJECT-TYPE
+	SYNTAX		Integer32
+	MAX-ACCESS	read-only
+	STATUS		current
+	DESCRIPTION	"Ebox Redundant Power"
+	::= { eboxEntry 4 }
+
+synologyEboxConformance	OBJECT IDENTIFIER ::= { synologyEbox 2 }
+synologyEboxCompliances	OBJECT IDENTIFIER ::= { synologyEboxConformance 1 }
+synologyEboxGroups OBJECT IDENTIFIER ::= { synologyEboxConformance 2 }
+
+synologyEboxCompliance MODULE-COMPLIANCE
+	STATUS				current
+	DESCRIPTION         "The compliance statement for ebox information."
+	MODULE				-- this module
+	MANDATORY-GROUPS	{ synologyEboxGroup }
+	::= { synologyEboxCompliances 1 }
+
+synologyEboxGroup OBJECT-GROUP
+	OBJECTS {	eboxIndex,
+				eboxModel,
+				eboxPower,
+				eboxRedundantPower }
+	STATUS		current
+	DESCRIPTION
+				"A collection of objects providing basic information
+				of an synology ebox entity."
+	::= { synologyEboxGroups 1 }
+
+END

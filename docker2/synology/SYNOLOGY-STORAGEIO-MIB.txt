@@ -1,0 +1,197 @@
+SYNOLOGY-STORAGEIO-MIB DEFINITIONS ::= BEGIN
+
+IMPORTS
+	DisplayString
+       	FROM SNMPv2-TC
+	OBJECT-GROUP, MODULE-COMPLIANCE
+		FROM SNMPv2-CONF
+	OBJECT-TYPE, Integer32, Counter32, Counter64, enterprises, MODULE-IDENTITY
+		FROM SNMPv2-SMI;
+
+storageIO MODULE-IDENTITY
+    LAST-UPDATED "201309110000Z"
+    ORGANIZATION "www.synology.com"
+    CONTACT-INFO
+         "Synology Inc.
+          Email: snmp@synology.com"
+    DESCRIPTION
+        "Characteristics of the storage io information"
+    REVISION     "201309110000Z"
+    DESCRIPTION
+        "Second draft."
+    ::= { synology 101 }		
+    
+synology	 OBJECT IDENTIFIER 
+	::= { enterprises 6574 }
+
+storageIOTable OBJECT-TYPE
+    SYNTAX      SEQUENCE OF StorageIOEntry
+    MAX-ACCESS  not-accessible
+    STATUS      current
+    DESCRIPTION
+        "Table of IO devices and how much data they have read/written."
+    ::= { storageIO 1 }
+
+storageIOEntry OBJECT-TYPE
+    SYNTAX      StorageIOEntry
+    MAX-ACCESS  not-accessible
+    STATUS      current
+    DESCRIPTION
+        "An entry containing a device and its statistics."
+    INDEX       { storageIOIndex }
+    ::= { storageIOTable 1 }
+
+StorageIOEntry ::= SEQUENCE {
+    storageIOIndex         Integer32,
+    storageIODevice        DisplayString,
+    storageIONRead         Counter32,
+    storageIONWritten      Counter32,
+    storageIOReads         Counter32,
+    storageIOWrites        Counter32,
+    storageIOLA            Integer32,
+    storageIOLA1           Integer32,
+    storageIOLA5           Integer32,
+    storageIOLA15          Integer32,
+    storageIONReadX        Counter64,
+    storageIONWrittenX     Counter64,
+    storageIODeviceSerial  DisplayString
+}
+
+storageIOIndex OBJECT-TYPE
+    SYNTAX      Integer32 (0..65535)
+    MAX-ACCESS  not-accessible
+    STATUS      current
+    DESCRIPTION
+        "Reference index for each observed device."
+    ::= { storageIOEntry 1 }
+
+storageIODevice OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-only
+    STATUS      current
+    DESCRIPTION
+        "The name of the device we are counting/checking."
+    ::= { storageIOEntry 2 }
+
+storageIONRead OBJECT-TYPE
+    SYNTAX      Counter32
+    MAX-ACCESS  read-only
+    STATUS      current
+    DESCRIPTION
+        "The number of bytes read from this device since boot."
+    ::= { storageIOEntry 3 }
+
+storageIONWritten OBJECT-TYPE
+    SYNTAX      Counter32
+    MAX-ACCESS  read-only
+    STATUS      current
+    DESCRIPTION
+        "The number of bytes written to this device since boot."
+    ::= { storageIOEntry 4 }
+
+storageIOReads OBJECT-TYPE
+    SYNTAX      Counter32
+    MAX-ACCESS  read-only
+    STATUS      current
+    DESCRIPTION
+        "The number of read accesses from this device since boot."
+    ::= { storageIOEntry 5 }
+
+storageIOWrites OBJECT-TYPE
+    SYNTAX      Counter32
+    MAX-ACCESS  read-only
+    STATUS      current
+    DESCRIPTION
+        "The number of write accesses to this device since boot."
+    ::= { storageIOEntry 6 }
+
+storageIOLA OBJECT-TYPE
+    SYNTAX      Integer32 (0..100)
+    MAX-ACCESS  read-only
+    STATUS      current
+    DESCRIPTION
+        "The load of disk (%)"
+    ::= { storageIOEntry 8 }
+
+storageIOLA1 OBJECT-TYPE
+    SYNTAX      Integer32 (0..100)
+    MAX-ACCESS  read-only
+    STATUS      current
+    DESCRIPTION
+        "The 1 minute average load of disk (%)"
+    ::= { storageIOEntry 9 }
+
+storageIOLA5 OBJECT-TYPE
+    SYNTAX      Integer32 (0..100)
+    MAX-ACCESS  read-only
+    STATUS      current
+    DESCRIPTION
+        "The 5 minute average load of disk (%)"
+    ::= { storageIOEntry 10 }
+
+storageIOLA15 OBJECT-TYPE
+    SYNTAX      Integer32 (0..100)
+    MAX-ACCESS  read-only
+    STATUS      current
+    DESCRIPTION
+        "The 15 minute average load of disk (%)"
+    ::= { storageIOEntry 11 }
+
+storageIONReadX OBJECT-TYPE
+    SYNTAX      Counter64
+    MAX-ACCESS  read-only
+    STATUS      current
+    DESCRIPTION
+        "The number of bytes read from this device since boot."
+    ::= { storageIOEntry 12 }
+
+storageIONWrittenX OBJECT-TYPE
+    SYNTAX      Counter64
+    MAX-ACCESS  read-only
+    STATUS      current
+    DESCRIPTION
+        "The number of bytes written to this device since boot."
+    ::= { storageIOEntry 13 }
+
+storageIODeviceSerial OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-only
+    STATUS      current
+    DESCRIPTION
+        "The name of the device we are counting/checking."
+    ::= { storageIOEntry 14 }
+
+storageIOConformance OBJECT IDENTIFIER ::= { storageIO 2 }
+storageIOCompliances OBJECT IDENTIFIER ::= { storageIOConformance 1 }
+storageIOGroups 			OBJECT IDENTIFIER ::= { storageIOConformance 2 }
+
+storageIOCompliance MODULE-COMPLIANCE
+    STATUS  current
+    DESCRIPTION
+            "The compliance statement for storage IO entities which
+            implement the SYNOLOGY STORAGEIO MIB."
+    MODULE  -- this module
+        MANDATORY-GROUPS { storageIOGroup }
+
+    ::= { storageIOCompliances 1 }
+
+storageIOGroup OBJECT-GROUP
+    OBJECTS { storageIODevice,
+              storageIONRead,
+              storageIONWritten,
+              storageIOReads,
+              storageIOWrites,
+              storageIOLA,
+              storageIOLA1,
+              storageIOLA5,
+              storageIOLA15,
+              storageIONReadX,
+              storageIONWrittenX,
+              storageIODeviceSerial}
+    STATUS  current
+    DESCRIPTION
+            "A collection of objects providing basic information
+             of an synology storage io entity."
+    ::= { storageIOGroups 1 }
+
+END

@@ -1,0 +1,218 @@
+SYNOLOGY-FLASHCACHE-MIB DEFINITIONS ::= BEGIN
+
+IMPORTS
+	DisplayString
+		FROM SNMPv2-TC
+	OBJECT-GROUP, MODULE-COMPLIANCE
+		FROM SNMPv2-CONF
+	OBJECT-TYPE, Integer32, Counter64, enterprises, MODULE-IDENTITY
+		FROM SNMPv2-SMI;
+
+flashCache MODULE-IDENTITY
+    LAST-UPDATED "201407170000Z"
+    ORGANIZATION "www.synology.com"
+    CONTACT-INFO
+         "Synology Inc.
+          Email: snmp@synology.com"
+    DESCRIPTION
+        "Characteristics of the flash cache information"
+    REVISION     "201407170000Z"
+    DESCRIPTION
+        "First draft."
+    ::= { synology 103 }
+
+synology	OBJECT IDENTIFIER
+	::= { enterprises 6574 }
+
+flashCacheTable OBJECT-TYPE
+    SYNTAX      SEQUENCE OF FlashCacheEntry
+    MAX-ACCESS  not-accessible
+    STATUS      current
+    DESCRIPTION
+        "Table of flash cache devices and how much data they have read/written."
+    ::= { flashCache 1 }
+
+flashCacheEntry OBJECT-TYPE
+    SYNTAX      FlashCacheEntry
+    MAX-ACCESS  not-accessible
+    STATUS      current
+    DESCRIPTION
+        "An entry containing a device and its statistics."
+    INDEX       { flashCacheIndex }
+    ::= { flashCacheTable 1 }
+
+FlashCacheEntry ::= SEQUENCE {
+    flashCacheIndex			Integer32,
+    flashCacheSSDDev		DisplayString,
+    flashCacheSpaceDev		DisplayString,
+    flashCacheReadHits		Counter64,
+    flashCacheWriteHits		Counter64,
+    flashCacheDiskRead		Counter64,
+    flashCacheDiskWrite		Counter64,
+    flashCacheTotalRead		Counter64,
+    flashCacheTotalWrite	Counter64,
+    flashCacheReadHitRate	Integer32,
+    flashCacheWriteHitRate	Integer32,
+    flashCacheReadSeqSkip	Counter64,
+    flashCacheWriteSeqSkip	Counter64,
+    flashCacheWriteMissSsd	Counter64,
+    flashCacheSsdUuid		DisplayString
+}
+
+flashCacheIndex OBJECT-TYPE
+    SYNTAX      Integer32 (0..65535)
+    MAX-ACCESS  not-accessible
+    STATUS      current
+    DESCRIPTION
+        "Reference index for each observed device."
+    ::= { flashCacheEntry 1 }
+
+flashCacheSSDDev OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-only
+    STATUS      current
+    DESCRIPTION
+        "The ssd device on flashcache we are counting/checking."
+    ::= { flashCacheEntry 2 }
+
+flashCacheSpaceDev OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-only
+    STATUS      current
+    DESCRIPTION
+        "The space device on flashcache we are counting/checking."
+    ::= { flashCacheEntry 3 }
+
+flashCacheReadHits OBJECT-TYPE
+    SYNTAX      Counter64
+    MAX-ACCESS  read-only
+    STATUS      current
+    DESCRIPTION
+        "The number of reads on flash cache."
+    ::= { flashCacheEntry 4 }
+
+flashCacheWriteHits OBJECT-TYPE
+    SYNTAX      Counter64
+    MAX-ACCESS  read-only
+    STATUS      current
+    DESCRIPTION
+        "The number of writes on flash cache."
+    ::= { flashCacheEntry 5 }
+
+flashCacheDiskRead OBJECT-TYPE
+    SYNTAX      Counter64
+    MAX-ACCESS  read-only
+    STATUS      current
+    DESCRIPTION
+        "The number of reads on disk."
+    ::= { flashCacheEntry 6 }
+
+flashCacheDiskWrite OBJECT-TYPE
+    SYNTAX      Counter64
+    MAX-ACCESS  read-only
+    STATUS      current
+    DESCRIPTION
+        "The number of writes on disk."
+    ::= { flashCacheEntry 7 }
+
+flashCacheTotalRead OBJECT-TYPE
+    SYNTAX      Counter64
+    MAX-ACCESS  read-only
+    STATUS      current
+    DESCRIPTION
+        "The number of reads on volume with flash cache."
+    ::= { flashCacheEntry 8 }
+
+flashCacheTotalWrite OBJECT-TYPE
+    SYNTAX      Counter64
+    MAX-ACCESS  read-only
+    STATUS      current
+    DESCRIPTION
+        "The number of writes on volume with flash cache."
+    ::= { flashCacheEntry 9 }
+
+flashCacheReadHitRate OBJECT-TYPE
+    SYNTAX      Integer32 (0..100)
+    MAX-ACCESS  read-only
+    STATUS      current
+    DESCRIPTION
+        "The read hit rate of flash cache (%)"
+    ::= { flashCacheEntry 10 }
+
+flashCacheWriteHitRate OBJECT-TYPE
+    SYNTAX      Integer32 (0..100)
+    MAX-ACCESS  read-only
+    STATUS      current
+    DESCRIPTION
+        "The write hit rate of flash cache (%)"
+    ::= { flashCacheEntry 11 }
+
+flashCacheReadSeqSkip OBJECT-TYPE
+    SYNTAX      Counter64
+    MAX-ACCESS  read-only
+    STATUS      current
+    DESCRIPTION
+        "The number of skipped sequential reads on flash cache."
+    ::= { flashCacheEntry 12 }
+
+flashCacheWriteSeqSkip OBJECT-TYPE
+    SYNTAX      Counter64
+    MAX-ACCESS  read-only
+    STATUS      current
+    DESCRIPTION
+        "The number of skipped sequential writes on flash cache."
+    ::= { flashCacheEntry 13 }
+
+flashCacheWriteMissSsd OBJECT-TYPE
+    SYNTAX      Counter64
+    MAX-ACCESS  read-only
+    STATUS      current
+    DESCRIPTION
+        "The number of data writes to SSD for the first time."
+    ::= { flashCacheEntry 14 }
+
+flashCacheSsdUuid OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-only
+    STATUS      current
+    DESCRIPTION
+        "The ssd UUID on flashcache we are counting/checking."
+    ::= { flashCacheEntry 15 }
+
+flashCacheConformance OBJECT IDENTIFIER ::= { flashCache 2 }
+flashCacheCompliances OBJECT IDENTIFIER ::= { flashCacheConformance 1 }
+flashCacheGroups 			OBJECT IDENTIFIER ::= { flashCacheConformance 2 }
+
+flashCacheCompliance MODULE-COMPLIANCE
+    STATUS  current
+    DESCRIPTION
+            "The compliance statement for flash cache entities which
+            implement the SYNOLOGY FLASHCACHE MIB."
+    MODULE  -- this module
+        MANDATORY-GROUPS { flashCacheGroup }
+
+    ::= { flashCacheCompliances 1 }
+
+flashCacheGroup OBJECT-GROUP
+    OBJECTS { flashCacheSSDDev,
+              flashCacheSpaceDev,
+              flashCacheReadHits,
+              flashCacheWriteHits,
+              flashCacheDiskRead,
+              flashCacheDiskWrite,
+              flashCacheTotalRead,
+              flashCacheTotalWrite,
+              flashCacheReadHitRate,
+              flashCacheWriteHitRate,
+              flashCacheReadSeqSkip,
+              flashCacheWriteSeqSkip,
+              flashCacheWriteMissSsd,
+              flashCacheSsdUuid}
+    STATUS  current
+    DESCRIPTION
+            "A collection of objects providing basic information
+             of an synology flash cache entity."
+    ::= { flashCacheGroups 1 }
+
+
+END

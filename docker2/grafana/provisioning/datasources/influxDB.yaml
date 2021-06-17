@@ -1,0 +1,12 @@
+# config file version
+apiVersion: 1
+
+datasources:
+  - name: InfluxDB
+    type: influxdb
+    access: proxy
+    database: telegraf
+    user: telegraf
+    secureJsonData:
+       password: telegraf
+    url: http://localhost:8086

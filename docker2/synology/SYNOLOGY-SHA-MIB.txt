@@ -1,0 +1,141 @@
+SYNOLOGY-SHA-MIB DEFINITIONS ::= BEGIN
+
+IMPORTS
+    MODULE-COMPLIANCE,
+    OBJECT-GROUP
+        FROM SNMPv2-CONF
+    MODULE-IDENTITY,
+    OBJECT-TYPE,
+    Unsigned32,
+    Integer32,
+    enterprises
+        FROM SNMPv2-SMI
+    TEXTUAL-CONVENTION,
+    TruthValue
+        FROM SNMPv2-TC;
+
+synologyHA MODULE-IDENTITY
+    LAST-UPDATED "201807250000Z"
+    ORGANIZATION "www.synology.com"
+    CONTACT-INFO
+        "Synology Inc.
+         Email: snmp@synology.com"
+    DESCRIPTION "Status of Synology High-Availability"
+    REVISION    "201807250000Z"
+    DESCRIPTION "First revision"
+    ::= { synology 106 }
+
+synology    OBJECT IDENTIFIER
+    ::= { enterprises 6574 }
+
+HostName ::= TEXTUAL-CONVENTION
+    DISPLAY-HINT    "255a"
+    STATUS          current
+    DESCRIPTION     "Host name"
+    SYNTAX          OCTET STRING (SIZE(0..256))
+
+ClusterStatusType ::= TEXTUAL-CONVENTION
+    STATUS      current
+    DESCRIPTION
+        "This TC enumerates cluster status."
+    SYNTAX      INTEGER {
+                    normal(0),
+                    warning(1),
+                    critical(2),
+                    upgrading(3),
+                    processing(4)
+                }
+
+HeartbeatStatusType ::= TEXTUAL-CONVENTION
+    STATUS      current
+    DESCRIPTION
+        "This TC enumerates heartbeat status."
+    SYNTAX      INTEGER {
+                    normal(0),
+                    abnormal(1),
+                    disconnected(2),
+                    empty(3)
+                }
+
+activeNodeName OBJECT-TYPE
+    SYNTAX      HostName
+    MAX-ACCESS  read-only
+    STATUS      current
+    DESCRIPTION "Hostname of node providing services"
+    ::= { synologyHA 1 }
+
+passiveNodeName OBJECT-TYPE
+    SYNTAX      HostName
+    MAX-ACCESS  read-only
+    STATUS      current
+    DESCRIPTION "Hostname of node not providing services"
+    ::= { synologyHA 2 }
+
+clusterAutoFailover OBJECT-TYPE
+    SYNTAX      TruthValue
+    MAX-ACCESS  read-only
+    STATUS      current
+    DESCRIPTION "Whether cluster can launch failover"
+    ::= { synologyHA 3 }
+
+clusterName OBJECT-TYPE
+    SYNTAX      HostName
+    MAX-ACCESS  read-only
+    STATUS      current
+    DESCRIPTION "Hostname of node providing services"
+    ::= { synologyHA 4 }
+
+clusterStatus OBJECT-TYPE
+    SYNTAX      ClusterStatusType
+    MAX-ACCESS  read-only
+    STATUS      current
+    DESCRIPTION "One of critical, upgrading, processing, warning, normal"
+    ::= { synologyHA 5 }
+
+heartbeatStatus OBJECT-TYPE
+    SYNTAX      HeartbeatStatusType
+    MAX-ACCESS  read-only
+    STATUS      current
+    DESCRIPTION "One of empty, disconnected, normal, abnormal"
+    ::= { synologyHA 6 }
+
+heartbeatTxRate OBJECT-TYPE
+    SYNTAX      Unsigned32
+    MAX-ACCESS  read-only
+    STATUS      current
+    DESCRIPTION "Transfer speed of heartbeat in kilo-byte-per-second"
+    ::= { synologyHA 7 }
+
+heartbeatLatency OBJECT-TYPE
+    SYNTAX      Unsigned32
+    MAX-ACCESS  read-only
+    STATUS      current
+    DESCRIPTION "Heartbeat latency in microseconds"
+    ::= { synologyHA 8 }
+
+synologyHAConformance   OBJECT IDENTIFIER ::= { synologyHA 9 }
+synologyHACompliances   OBJECT IDENTIFIER ::= { synologyHAConformance 1 }
+synologyHAGroups        OBJECT IDENTIFIER ::= { synologyHAConformance 2 }
+
+synologyHACompliance MODULE-COMPLIANCE
+    STATUS      current
+    DESCRIPTION "The compliance statement for SHA information."
+    MODULE      -- this module
+        MANDATORY-GROUPS { synologyHAGroup }
+    ::= { synologyHACompliances 1 }
+
+synologyHAGroup OBJECT-GROUP
+    OBJECTS     {
+                    activeNodeName,
+                    passiveNodeName,
+                    clusterAutoFailover,
+                    clusterName,
+                    clusterStatus,
+                    heartbeatStatus,
+                    heartbeatTxRate,
+                    heartbeatLatency
+                }
+    STATUS      current
+    DESCRIPTION "A collection of objects providing basic information of an synology High-availability cluster."
+    ::= { synologyHAGroups 1 }
+END
