@@ -11,4 +11,4 @@ services:
       - /volume1/docker/grafana/influxdb:/var/lib/influxdb
     ports:
       - 3003:3003
-      - 5144:514
+      - 5144:514/udp
