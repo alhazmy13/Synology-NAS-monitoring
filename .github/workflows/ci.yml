@@ -44,8 +44,7 @@ jobs:
         with:
           context: "{{defaultContext}}:docker"
           push: true
-          tags: "latest"
-          labels: ${{ steps.meta.outputs.labels }}
+          tags: alhazmy13/telegraf-influxdb-grafana:latest
 
   push-docker-readme:
     runs-on: ubuntu-latest
