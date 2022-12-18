@@ -44,7 +44,7 @@ jobs:
         with:
           context: "{{defaultContext}}:docker"
           push: true
-          tags: ${{ steps.tag-list.outputs.tags }}
+          tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
 
   push-docker-readme:
