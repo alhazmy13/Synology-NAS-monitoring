@@ -73,6 +73,7 @@ RUN wget https://dl.influxdata.com/telegraf/releases/telegraf_${TELEGRAF_VERSION
 # Configure Telegraf
 RUN mv -f /etc/telegraf/telegraf.conf /etc/telegraf/telegraf.conf.default 
 COPY telegraf/telegraf.conf /etc/telegraf/telegraf.conf
+COPY telegraf/init.sh /etc/init.d/telegraf
 RUN chmod 0777 /etc/init.d/telegraf
 
 # Install Chronograf
