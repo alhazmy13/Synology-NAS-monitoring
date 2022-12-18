@@ -61,9 +61,7 @@ RUN wget https://dl.influxdata.com/influxdb/releases/influxdb_${INFLUXDB_VERSION
 
 # Configure InfluxDB
 COPY influxdb/influxdb.conf /etc/influxdb/influxdb.conf
-COPY influxdb/init.sh /etc/init.d/influxdb
 RUN chmod 0777 /var/lib/influxdb
-RUN chmod 0777 /etc/init.d/influxdb
 
 #install syslog-ng 
 COPY syslog/syslog-ng.conf /etc/syslog-ng/syslog-ng.conf
@@ -75,7 +73,6 @@ RUN wget https://dl.influxdata.com/telegraf/releases/telegraf_${TELEGRAF_VERSION
 # Configure Telegraf
 RUN mv -f /etc/telegraf/telegraf.conf /etc/telegraf/telegraf.conf.default 
 COPY telegraf/telegraf.conf /etc/telegraf/telegraf.conf
-COPY telegraf/init.sh /etc/init.d/telegraf
 RUN chmod 0777 /etc/init.d/telegraf
 
 # Install Chronograf
