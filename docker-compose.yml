@@ -1,14 +1,15 @@
 version: '3'
 services:
   grafana:
-    image: alhazmy13/telegraf-influxdb-grafana:latest
+    build: ./docker/
     container_name: grafana
     environment:
       TZ: Europe/London
     restart: unless-stopped
     volumes:
-      - /volume1/docker/grafana:/var/lib/grafana
-      - /volume1/docker/grafana/influxdb:/var/lib/influxdb
+      - ./grafana:/var/lib/grafana
+      - ./grafana/influxdb:/var/lib/influxdb
     ports:
       - 3003:3003
+      - 8086:8086
       - 5144:514/udp

@@ -7,7 +7,7 @@ ENV LANG C.UTF-8
 
 # Default versions
 ENV TELEGRAF_VERSION 1.16.3-1
-ENV INFLUXDB_VERSION 1.8.3
+ENV INFLUXDB_VERSION 1.8.6
 ENV GRAFANA_VERSION  9.1.3
 ENV CHRONOGRAF_VERSION 1.8.9.1
 
@@ -62,6 +62,8 @@ RUN wget https://dl.influxdata.com/influxdb/releases/influxdb_${INFLUXDB_VERSION
 # Configure InfluxDB
 COPY influxdb/influxdb.conf /etc/influxdb/influxdb.conf
 COPY influxdb/init.sh /etc/init.d/influxdb
+RUN chmod 0777 /var/lib/influxdb
+RUN chmod 0777 /etc/init.d/influxdb
 
 #install syslog-ng 
 COPY syslog/syslog-ng.conf /etc/syslog-ng/syslog-ng.conf
@@ -74,6 +76,7 @@ RUN wget https://dl.influxdata.com/telegraf/releases/telegraf_${TELEGRAF_VERSION
 RUN mv -f /etc/telegraf/telegraf.conf /etc/telegraf/telegraf.conf.default 
 COPY telegraf/telegraf.conf /etc/telegraf/telegraf.conf
 COPY telegraf/init.sh /etc/init.d/telegraf
+RUN chmod 0777 /etc/init.d/telegraf
 
 # Install Chronograf
 RUN wget https://dl.influxdata.com/chronograf/releases/chronograf_${CHRONOGRAF_VERSION}_amd64.deb && \
@@ -86,6 +89,7 @@ RUN wget https://dl.grafana.com/oss/release/grafana_${GRAFANA_VERSION}_amd64.deb
 # Configure Grafana with provisioning
 ADD grafana/provisioning /etc/grafana/provisioning
 COPY grafana/grafana.ini /etc/grafana/grafana.ini
+RUN chmod 0777 /var/lib/grafana
 
 # Synology SNMP
 COPY synology/* /usr/share/snmp/mibs
