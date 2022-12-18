@@ -29,10 +29,8 @@ jobs:
         with:
           images: alhazmy13/telegraf-influxdb-grafana
           tags: |
-            type=ref,event=branch
-            type=ref,event=pr
-            type=semver,pattern={{version}}
-            type=semver,pattern={{major}}.{{minor}}
+            type=raw,value=latest,enable=${{ github.ref == format('refs/heads/{0}', 'master') }}
+            
       -
         # Setting up Docker Buildx with docker-container driver is required
         # at the moment to be able to use a subdirectory with Git context
@@ -44,7 +42,7 @@ jobs:
         with:
           context: "{{defaultContext}}:docker"
           push: true
-          tags: alhazmy13/telegraf-influxdb-grafana:latest
+          tags: ${{ steps.meta.outputs.tags }}
 
   push-docker-readme:
     runs-on: ubuntu-latest
