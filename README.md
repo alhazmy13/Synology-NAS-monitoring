@@ -43,3 +43,14 @@ The main points of this project are:
 3. Set Server = ***localhost***,  port = ***5144***, Protocol = ***UDP***, Format = ***BSD (RFC 3164)***
 4. For testing, click on "Send test log" 
 4. Apply
+
+## Configure Firewall
+If the firewall is enabled, then you need to add a new rule for port UDP/161, This is mandatory otherwise, some data will be missing from the dashboard https://github.com/alhazmy13/Synology-NAS-monitoring/issues/7 .
+
+1.  Open Control panel
+2.  Security -> Firewall
+3.  Edit Rules -> Create New Rule
+4.  In the ports section, select from a built-in applications and chose SNMP service
+5.  In the IP section select Spesifc IP -> subnet -> Source: 172.12.0.0 / subnet: 255.255.0.0
+6.  Action = Allow
+7.  Disable and re-enable the firewall for it to take effect
